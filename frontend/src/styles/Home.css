@@ -1,0 +1,93 @@
+/* General layout */
+body {
+    margin: 0;
+    font-family: 'Georgia', serif;
+    background-color: #fff7e5;
+  }
+  
+  .home-container {
+    padding: 0;
+  }
+  
+  /* Header */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #fa5b0f;
+    padding: 10px 20px;
+  }
+  
+  .logo {
+    background-color: #fa5b0f;
+    color: white;
+    font-size: 28px;
+    font-weight: bold;
+    padding: 8px 14px;
+    border-radius: 4px;
+  }
+  
+  /* Search and icons */
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .search-bar {
+    height: 28px;
+    width: 180px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding-left: 8px;
+  }
+  
+  .icons .icon {
+    font-size: 22px;
+    cursor: pointer;
+  }
+  
+  /* Title */
+  .main-content {
+    text-align: center;
+    padding: 40px 20px;
+  }
+  
+  .main-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #5e412f;
+  }
+  
+  .highlight {
+    color: #fa5b0f;
+  }
+  
+  /* Buddy grid */
+  .buddies-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 30px;
+    padding: 40px 20px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  
+  .buddy-card {
+    text-align: center;
+  }
+  
+  .buddy-avatar {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+    background-color: #ccc;
+    border-radius: 50%;
+  }
+  
+  .buddy-text {
+    margin-top: 10px;
+    color: #5e412f;
+    font-size: 14px;
+  }
+  
