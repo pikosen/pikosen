@@ -21,7 +21,7 @@ const Home = () => {
   const brewBuddies = [
     {
       name: 'Bean Voyage',
-      desc: 'Embark on a journey of flavor. 1',
+      desc: 'Embark on a journey of flavor.',
       logo: bean_voyage
     },
     {
