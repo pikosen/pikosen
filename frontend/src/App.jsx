@@ -4,6 +4,7 @@ import Login from "./pages/login"
 import Register from "./pages/register"
 import Home from "./pages/home"
 import NotFound from "./pages/notfound"
+import Products from "./pages/products"
 import ProtectedRoute from "./components/ProtectedRoute"
 import "./styles/Form.css"
 
@@ -23,14 +24,15 @@ function App() {
     <>
      <BrowserRouter>
       <Routes>
-        <Route
+        {/* <Route
           path="/"
           element={
             <ProtectedRoute>
               <Home />
             </ProtectedRoute>
           }
-        />   
+        />    */}
+
         <Route
           path="/login"
           element={<Login />}
@@ -42,6 +44,12 @@ function App() {
         <Route path="*"
           element={<NotFound />} >
         </Route>
+        <Route
+          path="/products"
+          element={
+              <Products />
+          }
+        />
       </Routes>
      </BrowserRouter>
     </>

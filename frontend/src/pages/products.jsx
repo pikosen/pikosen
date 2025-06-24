@@ -1,65 +1,133 @@
-// Refactored and improved BeanVoyage.js
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import '../styles/Products.css';
+import TopBar from '../components/TopBar';
+
+// Coffee data for different buddies
+const coffeeData = {
+  'Bean Voyage': {
+    products: [
+      {
+        id: 1,
+        name: 'Pasaporte Roast',
+        image: 'https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=300&h=200&fit=crop',
+        description: 'A journey through international appeal in every cup.',
+        flavorProfile: ['Rich', 'Bold', 'Smooth', 'International blend']
+      },
+      {
+        id: 2,
+        name: 'Departure Drip',
+        image: 'https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=300&h=200&fit=crop',
+        description: 'Start your morning adventure with this energizing blend.',
+        flavorProfile: ['Energizing', 'Citrus notes', 'Medium roast', 'Bright finish']
+      },
+      {
+        id: 3,
+        name: "Roaster's Compass",
+        image: 'https://images.unsplash.com/photo-1442512595331-e89e73853f31?w=300&h=200&fit=crop',
+        description: 'Navigate your taste buds through complex flavor territories.',
+        flavorProfile: ['Complex', 'Dark roast', 'Chocolate undertones', 'Full-bodied']
+      }
+    ]
+  },
+  'Beanery': {
+    products: [
+      {
+        id: 4,
+        name: 'House Blend',
+        image: 'https://images.unsplash.com/photo-1497935586351-b67a49e012bf?w=300&h=200&fit=crop',
+        description: 'Our signature coffee that started it all.',
+        flavorProfile: ['Balanced', 'Nutty', 'Medium roast', 'Classic taste']
+      },
+      {
+        id: 5,
+        name: 'Morning Glory',
+        image: 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=300&h=200&fit=crop',
+        description: 'Perfect morning companion with bright acidity.',
+        flavorProfile: ['Bright', 'Fruity', 'Light roast', 'Morning perfect']
+      }
+    ]
+  },
+  'Brewology': {
+    products: [
+      {
+        id: 6,
+        name: 'Science Blend',
+        image: 'https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=300&h=200&fit=crop',
+        description: 'Precisely crafted using scientific brewing methods.',
+        flavorProfile: ['Precise', 'Clean', 'Methodical', 'Perfect extraction']
+      }
+    ]
+  }
+};
 
 // Sidebar component
-const Sidebar = ({ items, activeIndex = 0 }) => (
-  <div className="w-48 bg-orange-50 border-r border-orange-200">
-    <div className="h-20 bg-orange-500 flex items-center justify-center">
-      <span className="text-white text-3xl font-bold" style={{ fontFamily: 'Pathway Gothic One, sans-serif' }}>
-        ps
-      </span>
+const Sidebar = ({ items, activeIndex, onItemClick }) => (
+  <div className="sidebar">
+    <div className="buddies-header">
+      <h2> Buddies </h2>
     </div>
-    <div className="bg-orange-500 px-4 py-2">
-      <h2 className="text-white text-lg" style={{ fontFamily: 'Neuton, serif' }}>
-        Buddies
-      </h2>
-    </div>
-    <div className="py-2">
+    <div className="sidebar-items">
       {items.map((item, index) => (
         <div
           key={index}
-          className={`px-4 py-2 cursor-pointer transition-colors rounded-md ${
-            index === activeIndex ? 'bg-orange-500 text-white' : 'text-gray-700 hover:bg-orange-100'
-          }`}
+          className={`sidebar-item ${index === activeIndex ? 'active' : ''}`}
+          onClick={() => onItemClick(index)}
         >
-          <span style={{ fontFamily: 'Arimo, sans-serif' }}>{item}</span>
+          <span>{item}</span>
         </div>
       ))}
     </div>
   </div>
 );
 
-// Card component
-const Card = () => (
-  <div className="bg-white rounded-lg shadow-sm p-4">
-    <div className="h-32 bg-gray-300 rounded mb-4"></div>
-    <div className="space-y-1">
-      {Array.from({ length: 4 }).map((_, i) => (
-        <div key={i} className="h-3 bg-gray-400 rounded w-3/4"></div>
-      ))}
+// Product Card component
+const ProductCard = ({ product, onHover }) => (
+  <div 
+    className="card"
+    onMouseEnter={() => onHover(product)}
+  >
+    <div 
+      className="card-image"
+      style={{
+        backgroundImage: `url(${product.image})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center'
+      }}
+    ></div>
+    <div className="card-text">
+      <h3 className="product-name">{product.name}</h3>
     </div>
   </div>
 );
 
 // Right Panel component
-const RightPanel = () => (
-  <div className="w-80 bg-orange-500 p-6">
-    <h2 className="text-white text-2xl mb-6" style={{ fontFamily: 'Arimo, sans-serif', fontWeight: 'bold' }}>
-      Jean's Beans
+const RightPanel = ({ selectedProduct, activeBuddy }) => (
+  <div className="right-panel">
+    <h2 className="right-title">
+      {selectedProduct?.name || `${activeBuddy}'s Coffee`}
     </h2>
-    <div className="bg-white h-64 rounded mb-6"></div>
-    <div className="text-white space-y-4">
-      <div className="text-lg" style={{ fontFamily: 'Arimo, sans-serif' }}>
-        yapyapyapperino<br />yapyapyapperino
+    <div 
+      className="right-box"
+      style={{
+        backgroundImage: selectedProduct ? `url(${selectedProduct.image})` : 'none',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center'
+      }}
+    ></div>
+    <div className="right-text">
+      <div className="paragraph">
+        {selectedProduct?.description || `Discover the finest coffee from ${activeBuddy}`}
       </div>
-      <ul className="space-y-2 ml-4">
-        {Array.from({ length: 4 }).map((_, i) => (
-          <li key={i} className="flex items-center">
-            <span className="w-2 h-2 bg-amber-800 rounded-full mr-3"></span>
-            <span style={{ fontFamily: 'Arimo, sans-serif' }}>yap</span>
-          </li>
-        ))}
-      </ul>
+      {selectedProduct?.flavorProfile && (
+        <ul className="bullet-list">
+          {selectedProduct.flavorProfile.map((flavor, i) => (
+            <li key={i} className="bullet-item">
+              <span className="bullet"></span>
+              <span>{flavor}</span>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   </div>
 );
@@ -78,50 +146,63 @@ export default function BeanVoyage() {
     'Zussy Co.'
   ];
 
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  
+  const activeBuddy = sidebarItems[activeIndex];
+  const currentProducts = coffeeData[activeBuddy]?.products || [];
+
+  const handleSidebarClick = (index) => {
+    setActiveIndex(index);
+    setSelectedProduct(null);
+  };
+
+  const handleProductHover = (product) => {
+    setSelectedProduct(product);
+  };
+
+  useEffect(() => {
+    if (activeBuddy === 'Bean Voyage' && !selectedProduct && currentProducts.length > 0) {
+      setSelectedProduct(currentProducts[0]);
+    }
+  }, [activeBuddy, selectedProduct, currentProducts]);
+
   return (
-    <div className="relative min-h-screen bg-orange-50 flex">
-      {/* Sidebar */}
-      <Sidebar items={sidebarItems} />
+    <div className="container">
+      <Sidebar 
+        items={sidebarItems} 
+        activeIndex={activeIndex}
+        onItemClick={handleSidebarClick}
+      />
 
-      {/* Main Content */}
-      <div className="flex-1 flex flex-col">
-        {/* Top bar */}
-        <div className="flex justify-end items-center p-4">
-          <input
-            type="text"
-            placeholder="Search..."
-            className="rounded-full border border-orange-500 px-4 py-1 focus:outline-none"
-          />
-          <div className="ml-4 w-8 h-8 border-2 border-orange-500 rounded flex items-center justify-center">
-            <div className="w-4 h-4 border border-orange-500 rounded"></div>
-          </div>
-          <div className="ml-2 w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center">
-            <div className="w-4 h-4 bg-white rounded-full"></div>
-          </div>
-        </div>
+      <div className="main">
+        <TopBar />
 
-        <div className="flex flex-1">
-          {/* Center Content */}
-          <div className="flex-1 p-8">
-            <h1 className="text-4xl text-gray-800 mb-8" style={{ fontFamily: 'Arimo, sans-serif', fontWeight: 'bold' }}>
-              Bean Voyage
-            </h1>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {Array.from({ length: 6 }).map((_, index) => (
-                <Card key={index} />
-              ))}
+        <div className="content">
+          <div className="main-content">
+            <h1 className="page-title">{activeBuddy}</h1>
+            <div className="card-grid">
+              {currentProducts.length > 0 ? (
+                currentProducts.map((product) => (
+                  <ProductCard 
+                    key={product.id} 
+                    product={product}
+                    onHover={handleProductHover}
+                  />
+                ))
+              ) : (
+                <div className="no-products">
+                  <p>Products coming soon for {activeBuddy}!</p>
+                </div>
+              )}
             </div>
           </div>
-
-          {/* Right Sidebar */}
-          <RightPanel />
+          <RightPanel 
+            selectedProduct={selectedProduct} 
+            activeBuddy={activeBuddy}
+          />
         </div>
       </div>
-
-      {/* Google Fonts */}
-      <style jsx>{`
-        @import url('https://fonts.googleapis.com/css2?family=Pathway+Gothic+One&family=Neuton:wght@400&family=Arimo:wght@400;700&display=swap');
-      `}</style>
     </div>
   );
 }
