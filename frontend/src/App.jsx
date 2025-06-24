@@ -1,4 +1,4 @@
-import react from "react"
+import react from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
 import Login from "./pages/login"
 import Register from "./pages/register"
@@ -6,6 +6,7 @@ import Home from "./pages/home"
 import NotFound from "./pages/notfound"
 import ProtectedRoute from "./components/ProtectedRoute"
 import "./styles/Form.css"
+import "./styles/Home.css"
 
 function Logout() {
   localStorage.clear()
@@ -24,11 +25,9 @@ function App() {
      <BrowserRouter>
       <Routes>
         <Route
-          path="/"
+          path="/home"
           element={
-            <ProtectedRoute>
               <Home />
-            </ProtectedRoute>
           }
         />   
         <Route
