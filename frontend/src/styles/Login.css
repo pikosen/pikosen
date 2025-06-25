@@ -1,0 +1,173 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Georgia', serif;
+  background: url("../assets/logos_n_beans/coffee_bg.png") no-repeat center 150px fixed;
+  background-size: cover;
+  backdrop-filter: blur(6px);
+  height: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.04);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.page {
+  position: relative;
+  z-index: 2;
+}
+
+.navbar {
+  height: 56px;
+  display: flex;
+  align-items: center;
+  padding: 0 30px;
+  border-bottom: 1px solid #ff6200;
+  background: #fffdd0;
+  z-index: 10;
+  position: relative;
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.logo-img {
+  height: 100px;
+  margin-left: -30px;
+  margin-top: 12px;
+  display: block;
+}
+
+.nav-right {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav-icon {
+  height: 33px;
+  width: 33px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.search-box {
+  padding: 12px 20px;
+  border: 2px solid #ff6200;
+  border-radius: 10px;
+  width: 200px;
+  font-size: 14px;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  z-index: 2;
+  position: relative;
+}
+
+.coffee-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  margin-bottom: -40px;
+}
+
+.main-logo-img {
+  height: 450px;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.slogan {
+  font-size: 28px;
+  color: #76513b;
+  margin: 0px 0 10px;
+  letter-spacing: -2px;
+}
+
+.google-signin {
+  background-color: #000;
+  color: white;
+  font-size: 16px;
+  padding: 10px 20px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.google-signin img {
+  height: 20px;
+}
+
+.kape-bg {
+  position: absolute;
+  top: 56px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.kape-bg span {
+  position: absolute;
+  color: #ff6200;
+  font-size: 28px;
+  opacity: 0.005;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+}
+
+.beans-footer {
+  height: 150px;
+  background-repeat: repeat-x;
+  background-size: auto 100%;
+  background-position: bottom;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  z-index: 3;
+}
+
+@keyframes float {
+  0%   { transform: translateY(0); }
+  50%  { transform: translateY(-8px); }
+  100% { transform: translateY(0); }
+}
+
+@media (max-width: 600px) {
+  .search-box {
+    width: 180px;
+    font-size: 13px;
+    padding: 8px 12px;
+  }
+
+  .main-logo-img {
+    height: 180px;
+  }
+
+  .slogan {
+    font-size: 18px;
+  }
+}
