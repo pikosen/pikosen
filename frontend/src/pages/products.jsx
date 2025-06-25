@@ -7,6 +7,7 @@ const coffeeData = {
   'Bean Voyage': {
     products: [
       {
+
         id: 1,
         name: 'Pasaporte Roast',
         image: 'https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=300&h=200&fit=crop',
@@ -32,6 +33,7 @@ const coffeeData = {
   'Beanery': {
     products: [
       {
+        
         id: 4,
         name: 'House Blend',
         image: 'https://images.unsplash.com/photo-1497935586351-b67a49e012bf?w=300&h=200&fit=crop',
@@ -169,15 +171,14 @@ export default function BeanVoyage() {
 
   return (
     <div className="container">
+      <TopBar />
+      
       <Sidebar 
         items={sidebarItems} 
         activeIndex={activeIndex}
         onItemClick={handleSidebarClick}
       />
-
       <div className="main">
-        <TopBar />
-
         <div className="content">
           <div className="main-content">
             <h1 className="page-title">{activeBuddy}</h1>
