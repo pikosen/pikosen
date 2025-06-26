@@ -1,13 +1,18 @@
-html, body {
+@import url('https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400..700;1,400..700&family=Neuton:ital,wght@0,200;0,300;0,400;0,700;0,800;1,400&family=Pathway+Gothic+One&display=swap');
+
+body {
   margin: 0;
   padding: 0;
-  font-family: 'Georgia', serif;
-  background: url("../assets/logos_n_beans/coffee_bg.png") no-repeat center 150px fixed;
+  font-family: 'Newton', serif;
+  background-color: #fff9e3; 
+  background-repeat: no-repeat;
+  background-position: center 150px;
   background-size: cover;
   backdrop-filter: blur(6px);
-  height: 100%;
-  min-height: 100vh;
+  height: 100vh;
   overflow: hidden;
+  position: relative;
+  z-index: 0;
 }
 
 body::before {
@@ -17,25 +22,34 @@ body::before {
   left: 0;
   height: 100%;
   width: 100%;
-  background-color: rgba(255, 255, 255, 0.04);
-  z-index: 0;
+  background-color: rgba(255, 255, 255, 0.04); 
+  z-index: -1; 
   pointer-events: none;
 }
 
 .page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
   position: relative;
+  overflow: hidden;
   z-index: 2;
 }
 
 .navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 97%;
   height: 56px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   padding: 0 30px;
   border-bottom: 1px solid #ff6200;
-  background: #fffdd0;
-  z-index: 10;
-  position: relative;
+  background: #fff9e3;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  z-index: 1000;
 }
 
 .nav-left {
@@ -62,7 +76,7 @@ body::before {
 .nav-icon {
   height: 33px;
   width: 33px;
-  margin-left: 10px;
+  margin-left: 20px;
   cursor: pointer;
 }
 
@@ -72,23 +86,26 @@ body::before {
   border-radius: 10px;
   width: 200px;
   font-size: 14px;
+  font-family: 'Arimo', serif;
 }
 
 .main {
+  flex: 1;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  padding: 10px;
+  padding-top: 80px; 
   z-index: 2;
-  position: relative;
 }
 
 .coffee-logo {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 10px;
+  margin-top: -90px;  
   margin-bottom: -40px;
+  transform: translateX(-85px); 
 }
 
 .main-logo-img {
@@ -98,9 +115,13 @@ body::before {
 }
 
 .slogan {
-  font-size: 28px;
+  font-size: 30px;
+  font-family: 'Newton', serif;
   color: #76513b;
   margin: 0px 0 10px;
+  margin-top: -40px;  
+  margin-bottom: -20px;
+  transform: translateX(-85px); 
   letter-spacing: -2px;
 }
 
@@ -115,6 +136,8 @@ body::before {
   display: flex;
   align-items: center;
   gap: 10px;
+  margin-top: 40px;
+  transform: translateX(-85px); 
 }
 
 .google-signin img {
@@ -123,37 +146,39 @@ body::before {
 
 .kape-bg {
   position: absolute;
-  top: 56px;
+  top: 80px;
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: 1;
+  z-index: 0; 
   pointer-events: none;
+  overflow: hidden;
 }
 
 .kape-bg span {
   position: absolute;
   color: #ff6200;
   font-size: 28px;
-  opacity: 0.005;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+  opacity: 0.5;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%   { transform: translateY(0); }
+  50%  { transform: translateY(-6px); }
+  100% { transform: translateY(0); }
 }
 
 .beans-footer {
   height: 150px;
   background-repeat: repeat-x;
-  background-size: auto 100%;
+  background-size: auto 80%;
   background-position: bottom;
   position: absolute;
   bottom: 0;
-  width: 100%;
+  width: 70%;
   z-index: 3;
-}
-
-@keyframes float {
-  0%   { transform: translateY(0); }
-  50%  { transform: translateY(-8px); }
-  100% { transform: translateY(0); }
 }
 
 @media (max-width: 600px) {
@@ -168,6 +193,12 @@ body::before {
   }
 
   .slogan {
-    font-size: 18px;
+    font-size: 20px;
   }
+}
+.main-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform: translateX(-80px); 
 }
