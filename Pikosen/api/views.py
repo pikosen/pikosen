@@ -5,6 +5,8 @@ from rest_framework import generics
 from .serializers import *
 from .models import *
 from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.decorators import api_view
+from rest_framework import viewsets
 
 # Create your views here.
 class CreateUserView(generics.CreateAPIView):
@@ -18,6 +20,16 @@ class ListProductView(generics.CreateAPIView):
     permission_classes = [AllowAny]
 
 class CreateBusinessView(generics.CreateAPIView):
+    queryset = Business.objects.all()
+    serializer_class = BusinessSerializer
+    permission_classes = [AllowAny]
+
+class InputAddressView(generics.CreateAPIView):
+    queryset = Address.objects.all()
+    serializer_class = AddressSerializer
+    permission_classes = [AllowAny]
+
+class BeanShopView(viewsets.ReadOnlyModelViewSet):
     queryset = Business.objects.all()
     serializer_class = BusinessSerializer
     permission_classes = [AllowAny]

@@ -4,6 +4,7 @@ import Login from "./pages/login"
 import Register from "./pages/register"
 import Home from "./pages/home"
 import NotFound from "./pages/notfound"
+import ListProduct from "./pages/listproduct"
 import ProtectedRoute from "./components/ProtectedRoute"
 import "./styles/Form.css"
 
@@ -26,9 +27,7 @@ function App() {
         <Route
           path="/"
           element={
-            <ProtectedRoute>
               <Home />
-            </ProtectedRoute>
           }
         />   
         <Route
@@ -41,6 +40,9 @@ function App() {
         />
         <Route path="*"
           element={<NotFound />} >
+        </Route>
+        <Route path="/listproduct"
+          element={<ListProduct />} >
         </Route>
       </Routes>
      </BrowserRouter>

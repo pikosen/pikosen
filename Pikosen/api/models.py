@@ -1,16 +1,17 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-METHOD_CHOICES = {
-    "WET": "Wet",
-    "DRY": "Dry",
-    "HONEY": "Honey",
+GENDER_CHOICES = {
+    "FEMALE": "Female",
+    "MALE": "Male",
     }
 
 # Create your models here.
 class Account(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, unique=True)
     name = models.CharField(max_length=32)
+    gender = models.CharField(null=True, blank=True, choices=GENDER_CHOICES)
+    age = models.SmallIntegerField(null=True, blank=True)
     contact = models.BigIntegerField()
     profilePhoto = models.ImageField(upload_to="profile_photo/", default="profile_photo/generic_profile.jpg", null=True, blank=True)
     isOwner = models.BooleanField(default=0, null=True, blank=True)
@@ -44,7 +45,6 @@ class Product(models.Model):
     origin = models.CharField(null=True, blank=True)
     type = models.CharField(null=True, blank=True)
     grams = models.IntegerField()
-    process = models.CharField(null=True, blank=True, choices=METHOD_CHOICES)
     mainImg = models.ImageField(upload_to="product_img", default="product_img/generic_product.jpg", null=True, blank=True)
 
 class Images(models.Model):
@@ -56,6 +56,6 @@ class Images(models.Model):
 
 class Cart(models.Model):
     customer = models.ForeignKey(Account, on_delete=models.CASCADE)
-    items = models.ManyToManyField(Product, blank=True)
+    item = models.ManyToManyField(Product, blank=True)
     isOrdered = models.BooleanField(default=0, blank=True)
     isDelivered = models.BooleanField(default=0, blank=True)
