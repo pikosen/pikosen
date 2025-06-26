@@ -1,10 +1,10 @@
 import React from "react";
-import "../styles/Login.css"; 
+import "../styles/Login.css";
 
-import LogoMain from "../assets/logos_n_beans/piko_logo_green.png";
-import LogoNav from "../assets/logos_n_beans/PS_logo_leaf_or.png";
-import ShoppingBag from "../assets/logos_n_beans/Shopping_bag.png";
-import AccountCircle from "../assets/logos_n_beans/account_circle.png";
+import LogoMain from "../assets/piko_logo_green.png";
+import LogoNav from "../assets/PS_logo_leaf_or.png";
+import ShoppingBag from "../assets/Shopping_bag.png";
+import AccountCircle from "../assets/account_circle.png";
 
 function getRandomPositions(count) {
   const positions = [];
@@ -22,27 +22,28 @@ const kapePositions = getRandomPositions(40);
 
 function LoginPage() {
   return (
-    <div className="page">
+    <div className="login-page bg-coffee">
+      {/* Navbar */}
       <header className="navbar">
         <div className="nav-left">
-          <img src={LogoNav} alt="../assets/logos_n_beans/PS_logo_leaf_or.png" className="logo-img" />
+          <img src={LogoNav} alt="PS Logo Leaf" className="logo-img" />
         </div>
         <div className="nav-right">
           <input type="text" placeholder="Search..." className="search-box" />
-          <img src={ShoppingBag} alt="../assets/logos_n_beans/Shopping_bag.png" className="nav-icon" />
-          <img src={AccountCircle} alt="../assets/logos_n_beans/account_circle.png" className="nav-icon" />
+          <img src={ShoppingBag} alt="Shopping Bag Icon" className="nav-icon" />
+          <img src={AccountCircle} alt="Account Circle Icon" className="nav-icon" />
         </div>
       </header>
 
       <div className="main">
         <div className="coffee-logo">
-          <img src={LogoMain} alt="../assets/logos_n_beans/piko_logo_green.png" className="main-logo-img" />
+          <img src={LogoMain} alt="Piko Logo Green" className="main-logo-img" />
         </div>
         <h2 className="slogan">Brew a better day!</h2>
         <button className="google-signin">
           <img
             src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
-            alt="G"
+            alt="Google G logo"
           />
           Sign-in with Google
         </button>

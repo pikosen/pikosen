@@ -6,7 +6,7 @@ import Home from "./pages/home"
 import NotFound from "./pages/notfound"
 import Products from "./pages/products"
 import ProtectedRoute from "./components/ProtectedRoute"
-import "./styles/Form.css"
+import "./styles/Business_form.css"
 import "./styles/Home.css"
 
 function Logout() {
@@ -55,4 +55,4 @@ function App() {
   )
 }
 
-export default App
+export default App;
