@@ -1,7 +1,7 @@
 import React from "react";
 import "../styles/Business_form.css";
 
-export default function BusinessRegister() {
+export default function Register() {
   return (
     <div className="bg-coffee">
       <div className="register-container">

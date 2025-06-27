@@ -5,6 +5,8 @@ import Register from "./pages/register"
 import Home from "./pages/home"
 import NotFound from "./pages/notfound"
 import Products from "./pages/products"
+import Address from "./pages/Address"
+import AddingProduct from "./pages/Addproduct"
 import ProtectedRoute from "./components/ProtectedRoute"
 import "./styles/Business_form.css"
 import "./styles/Home.css"
@@ -48,7 +50,15 @@ function App() {
           element={
               <Products />
           }
-        />
+          />
+        <Route 
+            path="/address" 
+            element={<Address />} 
+          />
+        <Route
+            path="/addproduct"
+            element={<AddingProduct/>}
+          />
       </Routes>
      </BrowserRouter>
     </>
