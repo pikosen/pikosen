@@ -1,7 +1,8 @@
 import React from "react";
 import "../styles/Login.css";
 
-import LogoMain from "../assets/piko_logo_green.png";
+import TopBar from "../components/TopBar.jsx"
+import LogoMain from "../assets/Final_logo.jpg";
 import LogoNav from "../assets/PS_logo_leaf_or.png";
 import ShoppingBag from "../assets/Shopping_bag.png";
 import AccountCircle from "../assets/account_circle.png";
@@ -10,7 +11,7 @@ function getRandomPositions(count) {
   const positions = [];
   for (let i = 0; i < count; i++) {
     const top = Math.floor(Math.random() * 80 + 20);
-    const left = Math.floor(Math.random() * 100);
+    const left = Math.floor(Math.random() * 100);x
     if (top > 20 && top < 60 && left > 30 && left < 70) continue;
     const rotation = Math.floor(Math.random() * 60 - 30);
     positions.push({ top, left, rotation });
@@ -23,18 +24,7 @@ const kapePositions = getRandomPositions(40);
 function LoginPage() {
   return (
     <div className="login-page bg-coffee">
-      {/* Navbar */}
-      <header className="navbar">
-        <div className="nav-left">
-          <img src={LogoNav} alt="PS Logo Leaf" className="logo-img" />
-        </div>
-        <div className="nav-right">
-          <input type="text" placeholder="Search..." className="search-box" />
-          <img src={ShoppingBag} alt="Shopping Bag Icon" className="nav-icon" />
-          <img src={AccountCircle} alt="Account Circle Icon" className="nav-icon" />
-        </div>
-      </header>
-
+      <TopBar />
       <div className="main">
         <div className="coffee-logo">
           <img src={LogoMain} alt="Piko Logo Green" className="main-logo-img" />
