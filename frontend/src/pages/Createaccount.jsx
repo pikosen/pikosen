@@ -9,7 +9,7 @@ export default function Register() {
         <div className="logo-wrapper">
           <img src={LogoNav} alt="Logo" className="logo-img" />
         </div>
-        <h2>Create an Account</h2>
+        <h2>Create Account</h2>
         <form className="createaccount-form">
           <input type="text" placeholder="Username" required />
           <input

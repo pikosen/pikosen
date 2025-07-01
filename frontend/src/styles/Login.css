@@ -59,7 +59,7 @@ body::before {
 }
 
 .logo-img {
-  max-height: 120px; 
+  max-height: 90px; 
   width: auto;
   margin-left: -55px;
   margin-top: 20px;
@@ -132,7 +132,7 @@ body::before {
   color: #76513b;
   text-align: center;
   letter-spacing: -1px;
-  margin: -100px 163px 5px 0px;
+  margin: -110px 163px 5px 0px;
 }
 
 .login-form {
