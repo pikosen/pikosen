@@ -3,7 +3,7 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Newton', serif;
+  font-family: 'Neuton', serif;
   background-color: #fff9e3; 
   background-repeat: no-repeat;
   background-position: center 150px;
@@ -101,51 +101,75 @@ body::before {
   align-items: center;
   padding-top: 80px; 
   z-index: 2;
+  gap: 0px; 
 }
 
 .coffee-logo {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: -90px;  
-  margin-bottom: -40px;
-  transform: translateX(-85px); 
+}
+
+.appname {
+  font-size: 80px;
+  font-family: 'Neuton', serif;
+  color: #76513b;
+  letter-spacing: 10px;
+  margin: -40px 145px 5px 0px;
+  text-align: center;
 }
 
 .main-logo-img {
-  height: 650px;
+  height: 420px;
   max-width: 100%;
   object-fit: contain;
+  margin: -60px 163px 5px 0px;
 }
 
 .slogan {
   font-size: 30px;
-  font-family: 'Newton', serif;
+  font-family: 'Neuton', serif;
   color: #76513b;
-  margin: 0px 0 10px;
-  margin-top: -40px;  
-  margin-bottom: -20px;
-  transform: translateX(-85px); 
-  letter-spacing: -2px;
+  text-align: center;
+  letter-spacing: -1px;
+  margin: -100px 163px 5px 0px;
 }
 
-.google-signin {
-  background-color: #000;
-  color: white;
-  font-size: 16px;
+.login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin: 20px 163px 5px 0px;
+
+}
+
+.login-form input {
+  padding: 10px 16px;
+  border: 2px solid #000;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: 'Arimo', serif;
+  width: 240px;
+}
+
+.login-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin: 5px 7px 5px 0px;
+}
+
+.login-buttons button {
+  background-color: #ff6200;
+  color: #000;
+  font-size: 14px;
   padding: 10px 20px;
   border-radius: 6px;
   border: none;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-top: 40px;
-  transform: translateX(-85px); 
-}
-
-.google-signin img {
-  height: 20px;
+  font-family: 'Neuton', sans-serif;
 }
 
 .kape-bg {
@@ -182,6 +206,7 @@ body::before {
   position: absolute;
   bottom: 0;
   width: 70%;
+  opacity: 0.25;
   z-index: 3;
 }
 

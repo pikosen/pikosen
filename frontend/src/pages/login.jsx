@@ -26,17 +26,19 @@ function LoginPage() {
     <div className="login-page bg-coffee">
       <TopBar />
       <div className="main">
+        <h2 className="appname">PIKOSEN</h2>
         <div className="coffee-logo">
           <img src={LogoMain} alt="Piko Logo Green" className="main-logo-img" />
         </div>
-        <h2 className="slogan">Brew a better day!</h2>
-        <button className="google-signin">
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
-            alt="Google G logo"
-          />
-          Sign-in with Google
-        </button>
+        <h3 className="slogan">Brew a better day!</h3>
+        <div className="login-form">
+          <input type="text" placeholder="Username" className="login-input" />
+          <input type="password" placeholder="Password" className="login-input" />
+          <div className="login-buttons">
+            <button className="login-btn">Login</button>
+            <button className="signup-btn">Sign Up</button>
+          </div>
+        </div>
       </div>
 
       <div className="kape-bg">
