@@ -12,6 +12,7 @@ import ProtectedRoute from "./components/ProtectedRoute"
 import "./styles/register.css"
 import "./styles/Home.css"
 import "./styles/Createaccount.css"
+import "./styles/Login.css"
 
 function Logout() {
   localStorage.clear()

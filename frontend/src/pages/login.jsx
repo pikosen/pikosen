@@ -11,7 +11,7 @@ function getRandomPositions(count) {
   const positions = [];
   for (let i = 0; i < count; i++) {
     const top = Math.floor(Math.random() * 80 + 20);
-    const left = Math.floor(Math.random() * 100);x
+    const left = Math.floor(Math.random() * 100);
     if (top > 20 && top < 60 && left > 30 && left < 70) continue;
     const rotation = Math.floor(Math.random() * 60 - 30);
     positions.push({ top, left, rotation });
