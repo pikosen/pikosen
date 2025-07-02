@@ -19,9 +19,13 @@ export default function Register() {
             pattern=".*@.*"
             title="Email must contain '@'"
           />
-
           <input type="password" placeholder="Password" required />
           <input type="password" placeholder="Confirm Password" required />
+
+          <label className="sell-checkbox">
+            <input type="checkbox" />
+            I want to sell coffee beans
+          </label>
 
           <button type="submit">Register</button>
         </form>

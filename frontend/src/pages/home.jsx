@@ -15,6 +15,7 @@ import account_circle from '../assets/account_circle.png';
 import Group_7 from '../assets/Group_7.png'; 
 import PS_logo_leaf_or from '../assets/PS_logo_leaf_or.png';
 import piko_logo_green from '../assets/piko_logo_green.png';
+import TopBar from "../components/TopBar.jsx"
 
 
 const Home = () => {
@@ -73,20 +74,7 @@ const Home = () => {
 
   return (
     <div className="home-container">
-      {/* Header */}
-      <header className="header">
-        <div className="logo">
-          <img src={piko_logo_green} alt="Pikosen Logo" className="logo-img-inside" />
-        </div>
-        <div className="header-right">
-          <input type="text" className="search-bar" placeholder="Search..." />
-          <div className="icons">
-          <img src={Shopping_bag} alt="Shopping Bag" className="icon-img" />
-          <img src={account_circle} alt="Account" className="icon-img" />
-          </div>
-        </div>
-      </header>
-
+       <TopBar />
       {/* Main Content */}
       <main className="main-content">
         <h1 className="main-title">
