@@ -10,7 +10,7 @@ GENDER_CHOICES = {
 class Account(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, unique=True)
     name = models.CharField(max_length=32)
-    gender = models.CharField(null=True, blank=True, choices=GENDER_CHOICES)
+    gender = models.CharField(max_length=8, null=True, blank=True, choices=GENDER_CHOICES)
     age = models.SmallIntegerField(null=True, blank=True)
     contact = models.BigIntegerField()
     profilePhoto = models.ImageField(upload_to="profile_photo/", default="profile_photo/generic_profile.jpg", null=True, blank=True)
@@ -42,8 +42,8 @@ class Product(models.Model):
     price = models.BigIntegerField()
     stock = models.IntegerField(default=0)
     description = models.TextField(null=True, blank=True)
-    origin = models.CharField(null=True, blank=True)
-    type = models.CharField(null=True, blank=True)
+    origin = models.CharField(max_length=256, null=True, blank=True)
+    type = models.CharField(max_length=256, null=True, blank=True)
     grams = models.IntegerField()
     mainImg = models.ImageField(upload_to="product_img", default="product_img/generic_product.jpg", null=True, blank=True)
 
