@@ -1,12 +1,18 @@
-import react from 'react'
+import React from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
 import Login from "./pages/login"
 import Register from "./pages/register"
 import Home from "./pages/home"
 import NotFound from "./pages/notfound"
+import Products from "./pages/products"
+import Address from "./pages/Address"
+import CreateAccount from "./pages/Createaccount"
+import AddingProduct from "./pages/AddProduct"
 import ProtectedRoute from "./components/ProtectedRoute"
-import "./styles/Form.css"
+import "./styles/register.css"
 import "./styles/Home.css"
+import "./styles/Createaccount.css"
+import "./styles/Login.css"
 
 function Logout() {
   localStorage.clear()
@@ -40,12 +46,29 @@ function App() {
           element={<RegisterAndLogout />}
         />
         <Route path="*"
-          element={<NotFound />} >
-        </Route>
-      </Routes>
+          element={<NotFound />} 
+        />
+        <Route
+          path="/products"
+          element={
+              <Products />}
+          />
+        <Route 
+            path="/address" 
+            element={<Address />} 
+          />
+        <Route
+            path="/addproduct"
+            element={<AddingProduct/>}
+          />
+        <Route
+            path="/Createaccount"
+            element={<CreateAccount/>}
+          />
+        </Routes>
      </BrowserRouter>
     </>
   )
 }
 
-export default App
+export default App;

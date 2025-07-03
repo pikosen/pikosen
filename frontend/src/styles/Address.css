@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400..700;1,400..700&family=Neuton:ital,wght@0,200;0,300;0,400;0,700;0,800;1,400&family=Pathway+Gothic+One&display=swap');
+
+.address-container {
+  background-color: #fff9a3;
+  padding: 20px 70px 60px 70px;
+  width: 100%;
+  max-width: 900px;
+  margin: 60px auto;
+  margin-top: 40px;
+  border-radius: 10px;
+  border: 2px solid #000;
+  box-shadow: 0 6px 24px #76513b;
+  font-family: 'Arimo', serif;
+}
+
+.address-container h2 {
+  color: #ff6200;
+  font-size: 30px;
+  font-weight: bold;
+  margin-top: 50px;
+  margin-bottom: 30px;
+  margin-left: 259px;
+}
+
+.address-form input[type="text"] {
+  display: block;
+  width: 100%;
+  max-width: 800px;
+  padding: 10px 12px;
+  margin-bottom: 14px;
+  margin-left: -1px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 16px;
+  font-family: 'Arimo', serif;
+  box-sizing: border-box;
+}
+
+.address-form button {
+  width: 30%;
+  padding: 10px 12px;
+  background-color: #ff6200;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  display: block;
+  margin: 40px auto 25px auto; 
+  transition: background 0.3s ease;
+  font-family: 'Arimo', serif;
+}
+
+.address-form button:hover {
+  background-color: #e55b00;
+  margin-left: 10px;
+}
+
+.bg-coffee {
+  background-color: #fff9e3;
+  background-image: url("../assets/coffee_bg.png");
+  background-repeat: no-repeat;
+  background-position: center 150px;
+  background-attachment: fixed;
+  background-size: cover;
+  backdrop-filter: blur(6px);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 60px 20px;
+}
