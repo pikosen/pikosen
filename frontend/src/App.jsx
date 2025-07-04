@@ -9,6 +9,7 @@ import Address from "./pages/Address"
 import CreateAccount from "./pages/Createaccount"
 import AddingProduct from "./pages/AddProduct"
 import ProtectedRoute from "./components/ProtectedRoute"
+import AccountInfo from "./pages/AccountInfo"
 import "./styles/register.css"
 import "./styles/Home.css"
 import "./styles/Createaccount.css"
@@ -64,6 +65,10 @@ function App() {
         <Route
             path="/Createaccount"
             element={<CreateAccount/>}
+          />
+          <Route
+            path="/Accountinfo"
+            element={<AccountInfo/>}
           />
         </Routes>
      </BrowserRouter>

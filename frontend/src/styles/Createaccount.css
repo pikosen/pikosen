@@ -106,3 +106,35 @@
 .createaccount-form button:hover {
   background-color: #e55b00;
 }
+
+.gender-group {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: -5px;
+}
+
+.gender-group label {
+  font-size: 15px;
+  font-weight: 600;
+  color: #76513b;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.createaccount-form input[type="file"] {
+  padding: 8px;
+  background-color: #fffef0;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+.placeholder-note {
+  font-size: 13px;
+  color: #76513b;
+  text-align: left;
+  margin-top: -8px;
+  margin-bottom: 5px;
+  font-style: italic;
+}
+

@@ -3,7 +3,7 @@ import "../styles/Createaccount.css";
 import LogoNav from "../assets/PS_logo_leaf_or.png";
 import Form from "../components/Form"
 
-function Register() {
+function CreateAccount () {
   return (
         <div className="bg-coffee">
           <div className="createaccount-container">
@@ -17,4 +17,4 @@ function Register() {
   );
 }
 
-export default Register;
+export default CreateAccount;
