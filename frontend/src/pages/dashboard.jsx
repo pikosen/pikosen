@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from 'react';
 
 const Dashboard = () => {
@@ -53,3 +54,12 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+=======
+function Dashboard() {
+    return <div>
+        
+    </div>
+}
+
+export default Dashboard
+>>>>>>> e8651d33ab7713d44a7943bf826492a891f1f4dc

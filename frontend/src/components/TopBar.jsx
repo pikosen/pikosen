@@ -1,14 +1,25 @@
 import React from 'react';
-import '../styles/Products.css'; // optional for styles
+import '../styles/Login.css'; 
+
+import LogoNav from "../assets/PS_logo_leaf_or.png";
+import ShoppingBag from '../assets/Shopping_bag.png';
+import AccountCircle from '../assets/account_circle.png';
 
 const TopBar = () => (
-  <div className="top-bar">
-    <div className="logo">
-      <span className="logo-text">ps</span>
+  <div className="navbar">
+    <div className="nav-left">
+      <img
+         src={LogoNav}
+          alt="Logo"
+          className="logo-img"
+          style={{ maxHeight: '130px', marginTop: '-57px',marginLeft: '-55px' }}
+      />
     </div>
-    <input type="text" placeholder="Search..." className="search" />
-    <div className="icon-square"><div></div></div>
-    <div className="icon-circle"><div></div></div>
+    <div className="nav-right">
+      <input type="text" placeholder="Search..." className="search-box" />
+      <img src={ShoppingBag} alt="Shopping Bag Icon" className="nav-icon" />
+      <img src={AccountCircle} alt="Account Circle Icon" className="nav-icon" />
+    </div>
   </div>
 );
 

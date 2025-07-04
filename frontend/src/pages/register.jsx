@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/Business_form.css";
+import "../styles/register.css";
 
 export default function Register() {
   return (
