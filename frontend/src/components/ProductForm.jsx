@@ -1,8 +1,29 @@
-import { use, useState } from "react"
+import { use, useState, useEffect } from "react"
 import api from "../api"
 import { useNavigate } from "react-router-dom"
+import "../styles/AddProduct.css"; 
 
 function ProductForm({route}) {
+
+    const [business, setBusiness] = useState(null);
+    // ... your other form state variables (productName, stock, etc.)
+
+    useEffect(() => {
+        // This function fetches the user's business data when the component mounts
+        const fetchUserBusiness = async () => {
+            try {
+                // Make a GET request to your endpoint that returns the user's business
+                const response = await api.get('api/business'); // 👈 Replace with your actual API endpoint
+                setBusiness(response.data);
+            } catch (error) {
+                console.error("Failed to fetch business info:", error);
+                alert("Could not load user's business information.");
+            }
+        };
+
+        fetchUserBusiness();
+    }, []);
+    
     const [productName, setProductName] = useState("")
     const [price, setPrice] = useState("")
     const [stock, setStock] = useState("")
@@ -10,8 +31,8 @@ function ProductForm({route}) {
     const [origin, setOrigin] = useState("")
     const [type, setType] = useState("")
     const [grams, setGrams] = useState("")
-    const [process, setProcess] = useState("")
-    const [loading, setLoading] = useState (false)
+    const [mainImg, setMainImage] = useState("")
+    const [loading, setLoading] = useState(false);
 
     const handleSubmit = async (e) => {
         setLoading(true)
@@ -19,8 +40,9 @@ function ProductForm({route}) {
 
         try {
             const res = await api.post(route, { 
+                business: business.id,
                 productName, stock, price, description, origin, 
-                type, grams
+                type, grams, mainImg,
              })
         } catch(error) {
             alert(error)
@@ -29,7 +51,7 @@ function ProductForm({route}) {
         }
     }
 
-    return <form onSumbit={handleSubmit} className="form-container">
+    return <form onSubmit={handleSubmit} className="addprod-form">
         <h1>
             Product Listing
         </h1>
@@ -82,13 +104,17 @@ function ProductForm({route}) {
             onChange={(e) => setGrams(e.target.value)}
             placeholder="Grams per package"
         />
-        <input 
-            className="form-input"
-            type="dropdown"
-            value={process}
-            onChange={(e) => setProcess(e.target.value)}
-            placeholder="Type of processing"
-        />
+        <label>Product Main Image</label>
+        <div className="addprod-upload-box">
+            <span>Choose a file or drag it here</span>
+            <input
+                className="form-input"
+                type="file"
+                value={mainImg}
+                onChange={(e) => setMainImage(e.target.value)}
+                placeholder="Product Image"
+            />
+        </div>
         <button className="form-button" type="submit">
             Submit
         </button>

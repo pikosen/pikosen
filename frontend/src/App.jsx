@@ -1,12 +1,12 @@
 import React from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
 import Login from "./pages/login"
-import Register from "./pages/register"
+import Register from "./pages/Createaccount"
 import Home from "./pages/home"
 import NotFound from "./pages/notfound"
 import Products from "./pages/products"
 import Address from "./pages/Address"
-import CreateAccount from "./pages/Createaccount"
+import CreateBusiness from "./pages/register"
 import AddingProduct from "./pages/AddProduct"
 import ProtectedRoute from "./components/ProtectedRoute"
 import "./styles/register.css"
@@ -31,7 +31,7 @@ function App() {
      <BrowserRouter>
       <Routes>
         <Route
-          path="/home"
+          path=""
           element={
               <Home />
           }
@@ -59,11 +59,11 @@ function App() {
           />
         <Route
             path="/addproduct"
-            element={<AddingProduct/>}
+            element={<AddingProduct />}
           />
         <Route
-            path="/Createaccount"
-            element={<CreateAccount/>}
+            path="/createbusiness"
+            element={<CreateBusiness />}
           />
         </Routes>
      </BrowserRouter>

@@ -159,15 +159,24 @@ body::before {
   margin: 5px 7px 5px 0px;
 }
 
-.login-buttons button {
+.login-buttons button,
+.login-buttons .signup-btn {
   background-color: #ff6200;
   color: #000;
   font-size: 14px;
   padding: 10px 20px;
+  border: 0;
   border-radius: 6px;
-  border: none;
   cursor: pointer;
   font-family: 'Neuton', sans-serif;
+  text-decoration: none;
+  width: 127px;
+  text-align: center;
+}
+
+.login-buttons button:hover,
+.login-buttons .signup-btn:hover {
+  background-color: #da641c;
 }
 
 .kape-bg {
@@ -205,7 +214,7 @@ body::before {
   bottom: 0;
   width: 70%;
   opacity: 0.25;
-  z-index: 3;
+  z-index: -1;
 }
 
 @media (max-width: 600px) {
