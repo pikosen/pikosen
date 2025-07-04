@@ -1,7 +1,7 @@
 import React from "react";
 import "../styles/Login.css";
-
-import TopBar from "../components/TopBar.jsx"
+import MainForm from "../components/MainForm"
+import TopBar from "../components/TopBar"
 import LogoMain from "../assets/Final_logo.jpg";
 import LogoNav from "../assets/PS_logo_leaf_or.png";
 import ShoppingBag from "../assets/Shopping_bag.png";
@@ -31,14 +31,7 @@ function LoginPage() {
           <img src={LogoMain} alt="Piko Logo Green" className="main-logo-img" />
         </div>
         <h3 className="slogan">Brew a better day!</h3>
-        <div className="login-form">
-          <input type="text" placeholder="Username" className="login-input" />
-          <input type="password" placeholder="Password" className="login-input" />
-          <div className="login-buttons">
-            <button className="login-btn">Login</button>
-            <button className="signup-btn">Sign Up</button>
-          </div>
-        </div>
+        <MainForm route="api/user/register/" method="login" />
       </div>
 
       <div className="kape-bg">

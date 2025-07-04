@@ -66,6 +66,22 @@ body {
   box-sizing: border-box;
 }
 
+.addprod-form input[type="number"],
+.addprod-form textarea,
+.addprod-form select {
+  display: block;
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 14px;
+  margin-left: 1px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 16px;
+  font-family: 'Arimo', serif;
+  background-color: #fff9e3;
+  box-sizing: border-box;
+}
+
 .addprod-form textarea {
   resize: vertical;
 }
