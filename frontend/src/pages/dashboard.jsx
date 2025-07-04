@@ -2,11 +2,9 @@ import React, { useState } from 'react';
 import TopBar from '../components/TopBar';
 
 function Dashboard() {
-  // State to track which nav button is active
   const [activeNav, setActiveNav] = useState('Cart');
-  const TOPBAR_HEIGHT = '64px'; // adjust if your TopBar is taller/shorter
+  const TOPBAR_HEIGHT = '64px';
 
-  // Layout and container styles
   const layout = {
     display: 'flex',
     flexDirection: 'column',
@@ -19,10 +17,9 @@ function Dashboard() {
     flex: 1,
     width: '100%',
     overflow: 'hidden',
-    marginTop: TOPBAR_HEIGHT, // push below TopBar
+    marginTop: TOPBAR_HEIGHT, 
   };
 
-  // Sidebar styles
   const sidebar = {
     width: '220px',
     backgroundColor: '#FFF8DC',
@@ -35,7 +32,6 @@ function Dashboard() {
     flexShrink: 0,
   };
 
-  // Base and active button styles
   const baseBtn = {
     backgroundColor: '#ffffff',
     color: '#5c3d2e',
@@ -54,7 +50,6 @@ function Dashboard() {
     color: '#ffffff',
   };
 
-  // Main content styles
   const main = {
     flex: 1,
     padding: '24px',
@@ -65,7 +60,6 @@ function Dashboard() {
     minWidth: 0,
   };
 
-  // Profile card styles
   const profileCard = {
     display: 'flex',
     flexDirection: 'row',
@@ -87,7 +81,6 @@ function Dashboard() {
     marginRight: '12px',
   };
 
-  // Section title and item card styles
   const sectionTitle = {
     fontSize: '18px',
     fontWeight: 600,
@@ -126,14 +119,12 @@ function Dashboard() {
     justifyContent: 'center',
   };
 
-  // Text style for items
   const textStyle = {
     color: '#000',
     fontSize: '16px',
     margin: '4px 0',
   };
 
-  // Data arrays
   const navItemsTop = [
     'Edit Account Information',
     'Add / Edit Products',
