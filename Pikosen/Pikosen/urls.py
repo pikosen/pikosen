@@ -12,6 +12,8 @@ urlpatterns = [
     path("api/<int:Account>/productlisting/", ListProductView.as_view(), name="product_listing"),
     path("api/<int:Account>/createbusiness/", CreateBusinessView.as_view(), name="create_business"),
     path("api/<int:Account>/address/", InputAddressView.as_view(), name="address"),
+    path("api/business", BusinessView.as_view({'get': 'list'}), name="get_business"),
+    path("api/account", AccountView.as_view({'get': 'list'}), name="get_account"),
     path("api-auth/", include("rest_framework.urls")),
     
 ]

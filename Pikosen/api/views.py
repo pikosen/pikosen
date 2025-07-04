@@ -33,3 +33,19 @@ class BeanShopView(viewsets.ReadOnlyModelViewSet):
     queryset = Business.objects.all()
     serializer_class = BusinessSerializer
     permission_classes = [AllowAny]
+
+class BusinessView(viewsets.ReadOnlyModelViewSet):
+    serializer_class = BusinessSerializer
+    permission_classes = [AllowAny]
+
+    def get_queryset(self):
+        user = self.request.user
+        return Business.objects.filter(Account=user.Account).first()
+    
+class AccountView(viewsets.ReadOnlyModelViewSet):
+    serializer_class = AccountSerializer
+    permission_classes = [AllowAny]
+
+    def get_queryset(self):
+        user = self.request.user
+        return Account.objects.filter(Account=user.Account).first()
