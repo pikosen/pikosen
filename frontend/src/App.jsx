@@ -9,9 +9,6 @@ import Address from './pages/Address';
 import AddingProduct from './pages/Addproduct';
 import ProtectedRoute from './components/ProtectedRoute';
 import Dashboard from './pages/dashboard';
-
-import './styles/Dashboard.css';
-import './styles/Business_form.css';
 import './styles/Home.css';
 
 function Logout() {
