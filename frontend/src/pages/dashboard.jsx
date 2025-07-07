@@ -1,9 +1,35 @@
-import React, { useState } from 'react';
-import TopBar from '../components/TopBar';
+import React, { useState, useEffect } from 'react'
+import TopBar from '../components/TopBar'
+import { Link } from 'react-router-dom'
+import api from "../api"
+
 
 function Dashboard() {
   const [activeNav, setActiveNav] = useState('Cart');
   const TOPBAR_HEIGHT = '64px';
+
+  const [Product, setProduct] = useState([])
+    useEffect(function(){
+        api.get("api/product")
+        .then(res => {
+            console.log(res.data)
+            setProduct(res.data)
+    })
+    .catch(err => {
+        console.log(err.message)
+    })
+ }, [])
+  const [Account, setAccount] = useState([])
+      useEffect(function(){
+          api.get("api/account")
+          .then(res => {
+              console.log(res.data)
+              setAccount(res.data)
+      })
+      .catch(err => {
+          console.log(err.message)
+      })
+  }, [])
 
   const layout = {
     display: 'flex',
@@ -171,29 +197,39 @@ function Dashboard() {
 
         <main style={main}>
           <section style={profileCard}>
-            <div style={profileIcon}>👤</div>
+            {Account.map((account) => (
             <div>
-              <h2 style={{ ...textStyle, fontSize: '20px', color: '#5c3d2e' }}>
-                Lebron Raymone James
-              </h2>
-              <p style={{ ...textStyle, fontSize: '14px', color: '#444' }}>
-                <strong>ID:</strong> +63 234 123 3453
+              <div style={profileIcon}>
+                <img
+                src={account.profilePhoto}
+                alt={`${account.name} photo`}
+                style={profileIcon}
+              />
+              </div>
+              <div>
+                <h2 style={{ ...textStyle, fontSize: '20px', color: '#5c3d2e' }}>
+                  {account.name}
+                </h2>
+                <p style={{ ...textStyle, fontSize: '14px', color: '#444' }}>
+                <strong>Contact:</strong> {account.contact}
               </p>
               <p style={{ ...textStyle, fontSize: '14px', color: '#444' }}>
-                <strong>Email:</strong> lebronthegoat@gmail.com
+                <strong>Email:</strong> {account.user.email}
               </p>
+              </div>
             </div>
+          ))}
           </section>
 
           <h3 style={sectionTitle}>All Items</h3>
 
           <div>
-            {items.map((item, idx) => (
+            {Product.map((item, idx) => (
               <div key={idx} style={itemCard}>
                 <div>
                   <h4 style={textStyle}>{item.name}</h4>
                   <p style={textStyle}>Type: {item.type}</p>
-                  <p style={textStyle}>Rating: {item.rating}</p>
+                  <p style={textStyle}>Business Brand: {item.Business}</p>
                 </div>
                 <button style={removeBtn}>X</button>
               </div>

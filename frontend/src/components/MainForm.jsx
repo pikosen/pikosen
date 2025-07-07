@@ -15,10 +15,10 @@ function MainForm() {
         e.preventDefault();
 
         try {
-            const res = await api.post("/api/token/", { username, password }); // Using a specific route for login
+            const res = await api.post("api/token/", { username, password }); // Using a specific route for login
             localStorage.setItem(ACCESS_TOKEN, res.data.access);
             localStorage.setItem(REFRESH_TOKEN, res.data.refresh);
-            navigate("/");
+            navigate("/updateinfo");
         } catch (error) {
             alert("Failed to log in: " + error.message);
         } finally {

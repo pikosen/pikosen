@@ -9,6 +9,7 @@ import Address from "./pages/Address"
 import CreateBusiness from "./pages/register"
 import AddingProduct from "./pages/AddProduct"
 import Dashboard from "./pages/dashboard"
+import AccountInfo from "./pages/AccountInfo"
 import "./styles/register.css"
 import "./styles/Home.css"
 import "./styles/Createaccount.css"
@@ -52,16 +53,24 @@ function App() {
               <Products />}
           />
         <Route 
-            path="/address" 
+            path="/address/:pk" 
             element={<Address />} 
           />
         <Route
-            path="/addproduct"
+            path="/addproduct/:pk"
             element={<AddingProduct />}
           />
         <Route
-            path="/createbusiness"
+            path="/createbusiness/:pk"
             element={<CreateBusiness />}
+          />
+          <Route
+            path="/dashboard/:pk"
+            element={<Dashboard />}
+          />
+          <Route 
+            path="/updateinfo/:pk"
+            element={<AccountInfo />}            
           />
         </Routes>
      </BrowserRouter>

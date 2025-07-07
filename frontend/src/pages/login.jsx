@@ -31,7 +31,7 @@ function LoginPage() {
           <img src={LogoMain} alt="Piko Logo Green" className="main-logo-img" />
         </div>
         <h3 className="slogan">Brew a better day!</h3>
-        <MainForm route="api/user/register/" method="login" />
+        <MainForm route="api/login/" method="login" />
       </div>
 
       <div className="kape-bg">
