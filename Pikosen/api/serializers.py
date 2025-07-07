@@ -52,3 +52,8 @@ class ImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Images
         fields = '__all__'
+
+class RegUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = '__all__'

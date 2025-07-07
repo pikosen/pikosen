@@ -27,8 +27,7 @@ class Business(models.Model):
     businessLogo = models.ImageField(upload_to="business_logo/", default="business_logo/generic_logo.jpg", null=True, blank=True)
     
 class Address(models.Model):
-    forCustomer = models.OneToOneField(Account, on_delete=models.CASCADE, null=True, blank=True)
-    forBusiness = models.OneToOneField(Business, on_delete=models.CASCADE, null=True, blank=True)
+    account = models.OneToOneField(Account, on_delete=models.CASCADE, null=True, blank=True)
     houseNumber = models.CharField(max_length=32)
     street = models.CharField(max_length=256)
     barangay = models.CharField(max_length=256)
