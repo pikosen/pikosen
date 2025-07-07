@@ -6,7 +6,7 @@ import api from "../api"
 
 function Dashboard() {
   const [activeNav, setActiveNav] = useState('Cart');
-  const TOPBAR_HEIGHT = '64px';
+  const TOPBAR_HEIGHT = '60px';
 
   const [Product, setProduct] = useState([])
     useEffect(function(){
@@ -108,7 +108,7 @@ function Dashboard() {
   };
 
   const sectionTitle = {
-    fontSize: '18px',
+    fontSize: '20px',
     fontWeight: 600,
     color: '#5c3d2e',
     borderBottom: '1px solid #f4a261',
