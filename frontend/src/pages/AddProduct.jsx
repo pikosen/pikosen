@@ -7,7 +7,7 @@ export default function AddProduct() {
     <div className="bg-coffee">
       <div className="addprod-container">
         <h2>Product Registration</h2>
-        <ProductForm route="api/<int:Account>/productlisting/" method="product_listing"/>
+        <ProductForm route="api/productlisting/" method="product_listing"/>
       </div>
     </div>
   );

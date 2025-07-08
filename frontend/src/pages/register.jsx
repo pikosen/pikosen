@@ -7,7 +7,7 @@ export default function Register() {
     <div className="bg-coffee">
       <div className="register-container">
         <h2>Register your business</h2>
-        <BusinessForm route="api/<int:Account>/createbusiness/" method="create_business"/>
+        <BusinessForm route="api/createbusiness/" method="create_business"/>
       </div>
     </div>
   );

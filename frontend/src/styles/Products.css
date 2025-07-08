@@ -2,11 +2,7 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400..700;1,400..700&family=Neuton:ital,wght@0,200;0,300;0,400;0,700;0,800;1,400&family=Pathway+Gothic+One&display=swap');
 
-body {
-    margin: 0;
-    font-family: 'Arimo', sans-serif;
-    background-color: #fff9e3; /* light orange */
-}
+
 
 .home-container {
     padding: 0;
@@ -51,11 +47,6 @@ body {
 }
 
 /* Title */
-.main-content {
-    text-align: center;
-    padding: 40px 20px;
-}
-
 .main-title {
     font-size: 2.5rem;
     font-weight: bold;
@@ -79,7 +70,7 @@ body {
     width: 12rem;
     height: calc(100vh - 4rem); /* Full height minus topbar height */
     background-color: #FFF9E3;
-    border-right: 1px solid #FF6200;
+    border-right: 2px solid #FF6200;
     display: flex;
     flex-direction: column;
     z-index: 1000;
@@ -130,14 +121,20 @@ body {
 
 .sidebar-item {
     color:#76513B;
-    padding: 0.75rem 3rem;
+    padding: 0.75rem 0.5rem;
     cursor: pointer;
     transition: background-color 0.2s ease;
     margin: 0 0.25rem;
     font-family: 'Arimo', serif;
-    font-size: 1.25rem;
-    line-height: 16px;
-    letter-spacing: -1px;
+    font-size: 24px;
+    line-height: 24px;
+    letter-spacing: -2px;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: calc(100% - 0.5rem);
+    text-align: center;
 }
 
 .sidebar-item:hover:not(.active) {
@@ -150,13 +147,34 @@ body {
     font-weight: 500;
 }
 
+/* For the sidebar scrollbar */
+.sidebar::-webkit-scrollbar {
+    width: 2px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+    background: #FFF9E3;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    background: #FF6200;
+    border-radius: 0px;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+    background: #e55100;
+}
+
 /* Main content area */
 .main {
     flex: 1;
     display: flex;
     flex-direction: column;
     margin-left: 12rem;
-    margin-top: 4rem; /* Adjusted for fixed sidebar */
+    margin-right: 21rem;
+    margin-top: 4rem;
+    width: calc(100vw - 33rem); 
+    max-width: calc(100vw - 33rem);
 }
 
 /* Top bar */
@@ -230,20 +248,43 @@ body {
 
 /* Content layout */
 .content {
-    display: flex;
+    display: block;
     flex: 1;
+    width: 100%;
+    max-width: 100%;
 }
 
 /* Center content */
 .main-content {
     flex: 1;
-    padding: 2rem;
+    padding: 0rem 2rem;
+    height: calc(100vh - 4rem);
+    overflow-y: auto;
+    min-width: 0;
+}
+
+/* Scrollbar styling for main-content */
+.main-content::-webkit-scrollbar {
+    width: 2px;
+}
+
+.main-content::-webkit-scrollbar-track {
+    background: #FFF9E3;
+}
+
+.main-content::-webkit-scrollbar-thumb {
+    background: #FF6200;
+    border-radius: 0px;
+}
+
+.main-content::-webkit-scrollbar-thumb:hover {
+    background: #e55100;
 }
 
 .page-title {
-    font-size: 2.25rem;
+    font-size: 3rem;
     color: #76513b;
-    margin-bottom: 2rem;
+    text-align: left;
     font-weight: bold;
     font-family: 'Arimo', serif;
 }
@@ -251,7 +292,7 @@ body {
 /* Card grid */
 .card-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
     gap: 1.5rem;
 }
 
@@ -284,19 +325,26 @@ body {
 
 .product-name {
     margin: 0;
-    font-size: 1.1rem;
+    font-size: 2rem;
     font-weight: bold;
     color: #76513b;
-    font-family: 'Neuton', serif;
+    font-family: 'Arimo', serif;
 }
 
 /* Right panel */
 .right-panel {
-    width: 20rem;
+    position: fixed; 
+    right: 0; 
+    top: 4rem;
+    width: 20rem; 
+    min-width: 20rem;
     background-color: #fff9e3;
-    padding: 1.5rem;
+    padding: 1.5rem 1.5rem 3rem 1.5rem;
     color: #76513b;
     border-left: 2px solid #FF6200;
+    height: calc(100vh - 4rem);
+    overflow-y: auto;
+    z-index: 999;
 }
 
 .right-title {
@@ -316,6 +364,24 @@ body {
 
 .right-text {
     font-size: 1rem;
+}
+
+/* Scrollbar styling for right-panel */
+.right-panel::-webkit-scrollbar {
+    width: 2px;
+}
+
+.right-panel::-webkit-scrollbar-track {
+    background: #FFF9E3;
+}
+
+.right-panel::-webkit-scrollbar-thumb {
+    background: #FF6200;
+    border-radius: 0px;
+}
+
+.right-panel::-webkit-scrollbar-thumb:hover {
+    background: #e55100;
 }
 
 .paragraph {

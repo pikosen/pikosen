@@ -1,28 +1,11 @@
 import { use, useState, useEffect } from "react"
 import api from "../api"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import "../styles/AddProduct.css"; 
 
 function ProductForm({route}) {
 
-    const [business, setBusiness] = useState(null);
-    // ... your other form state variables (productName, stock, etc.)
-
-    useEffect(() => {
-        // This function fetches the user's business data when the component mounts
-        const fetchUserBusiness = async () => {
-            try {
-                // Make a GET request to your endpoint that returns the user's business
-                const response = await api.get('api/business'); // 👈 Replace with your actual API endpoint
-                setBusiness(response.data);
-            } catch (error) {
-                console.error("Failed to fetch business info:", error);
-                alert("Could not load user's business information.");
-            }
-        };
-
-        fetchUserBusiness();
-    }, []);
+    const { pk } = useParams()
     
     const [productName, setProductName] = useState("")
     const [price, setPrice] = useState("")
@@ -31,25 +14,88 @@ function ProductForm({route}) {
     const [origin, setOrigin] = useState("")
     const [type, setType] = useState("")
     const [grams, setGrams] = useState("")
-    const [mainImg, setMainImage] = useState("")
+    const [mainImg, setMainImg] = useState("")
     const [loading, setLoading] = useState(false);
 
+    useEffect(() => {
+        api.get(`addproduct/${ pk }`)
+        .then(res => {
+            console.log(res.data)
+        })
+        .catch(err=>{
+            console.log(err.message)
+        })
+    }, [])
+
     const handleSubmit = async (e) => {
-        setLoading(true)
         e.preventDefault()
+        setLoading(true)
+
+        // Create FormData for file uploads
+        const formData = new FormData();
+
+        formData.append('business', pk);
+        formData.append('productName', productName);
+        formData.append('price', price);
+        formData.append('stock', stock);
+        formData.append('description', description);
+        formData.append('type', type);
+        formData.append('grams', grams);
+        
+        // Only append the photo if one was selected
+        if (mainImg) {
+            formData.append('mainImg', mainImg);
+            console.log("Photo being uploaded:", mainImg.name, mainImg.size, mainImg.type);
+        } else {
+            console.log("No photo selected");
+        }
 
         try {
-            const res = await api.post(route, { 
-                business: business.id,
-                productName, stock, price, description, origin, 
-                type, grams, mainImg,
-             })
+            // Send the FormData object with proper headers
+            const res = await api.post(route, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
+
+            console.log("Product listed successfully:", res.data);
+            navigate('/dashboard'); 
+            
         } catch(error) {
-            alert(error)
+            console.error("Error listing product:", error);
+            console.error("Error details:", error.response?.data);
+            alert(`Error: ${error.message}`);
         } finally {
             setLoading(false)
         }
     }
+
+    // Handle file selection with validation
+    const handlePhotoChange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            // Validate file type
+            const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif'];
+            if (!allowedTypes.includes(file.type)) {
+                alert('Please select a valid image file (JPEG, PNG, or GIF)');
+                e.target.value = ''; // Clear the input
+                return;
+            }
+            
+            // Validate file size (e.g., max 5MB)
+            const maxSize = 5 * 1024 * 1024; // 5MB in bytes
+            if (file.size > maxSize) {
+                alert('File size must be less than 5MB');
+                e.target.value = ''; // Clear the input
+                return;
+            }
+            
+            console.log("File selected:", file.name, file.size, file.type);
+            setMainImg(file);
+        } else {
+            setMainImg(null);
+        }
+    };
 
     return <form onSubmit={handleSubmit} className="addprod-form">
         <h1>
@@ -106,18 +152,24 @@ function ProductForm({route}) {
         />
         <label>Product Main Image</label>
         <div className="addprod-upload-box">
-            <span>Choose a file or drag it here</span>
             <input
-                className="form-input"
-                type="file"
-                value={mainImg}
-                onChange={(e) => setMainImage(e.target.value)}
-                placeholder="Product Image"
+              type="file"
+              name="mainImg"
+              accept="image/*"
+              onChange={handlePhotoChange}
             />
+            <small className="placeholder-note">
+              Please upload your profile photo here (Max 5MB, JPEG/PNG/GIF)
+            </small>
+            {mainImg && (
+              <div className="file-info">
+                <small>Selected: {mainImg.name}</small>
+              </div>
+            )}
         </div>
-        <button className="form-button" type="submit">
-            Submit
-        </button>
+        <button type="submit" disabled={loading}>
+            {loading ? 'Submitting...' : 'Submit'}
+          </button>
     </form>
 }
 
