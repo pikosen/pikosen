@@ -43,7 +43,7 @@ const TopBar = () => {
       width: 'auto',
       objectFit: 'contain',
       marginTop: '-22px',
-      marginLeft: '-90px'
+      marginLeft: '-95px'
     },
     navRight: {
       display: 'flex',
