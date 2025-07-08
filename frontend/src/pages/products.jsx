@@ -83,10 +83,11 @@ const Sidebar = ({ items, activeIndex, onItemClick }) => (
 );
 
 // Product Card component
-const ProductCard = ({ product, onHover }) => (
+const ProductCard = ({ product, onHover, onClick }) => (
   <div 
     className="card"
     onMouseEnter={() => onHover(product)}
+    onClick={() => onClick(product)}
   >
     <div 
       className="card-image"
@@ -101,6 +102,7 @@ const ProductCard = ({ product, onHover }) => (
     </div>
   </div>
 );
+
 
 // Right Panel component
 const RightPanel = ({ selectedProduct, activeBuddy }) => (
@@ -134,7 +136,7 @@ const RightPanel = ({ selectedProduct, activeBuddy }) => (
   </div>
 );
 
-export default function BeanVoyage() {
+export default function Products() {
   const sidebarItems = [
     'Bean Voyage',
     'Beanery',
@@ -148,6 +150,8 @@ export default function BeanVoyage() {
     'Zussy Co.'
   ];
 
+  const [isProductLocked, setIsProductLocked] = useState(false);
+
   const [activeIndex, setActiveIndex] = useState(0);
   const [selectedProduct, setSelectedProduct] = useState(null);
   
@@ -157,10 +161,18 @@ export default function BeanVoyage() {
   const handleSidebarClick = (index) => {
     setActiveIndex(index);
     setSelectedProduct(null);
+    setIsProductLocked(false); // Reset lock when changing buddies
   };
 
   const handleProductHover = (product) => {
+    if (!isProductLocked) {
+      setSelectedProduct(product);
+    }
+  };
+
+  const handleProductClick = (product) => {
     setSelectedProduct(product);
+    setIsProductLocked(true);
   };
 
   useEffect(() => {
@@ -189,6 +201,7 @@ export default function BeanVoyage() {
                     key={product.id} 
                     product={product}
                     onHover={handleProductHover}
+                    onClick={handleProductClick}
                   />
                 ))
               ) : (
