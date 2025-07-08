@@ -28,7 +28,6 @@ function MainForm() {
 
     return (
         <form onSubmit={handleSubmit} className="login-form">
-            <h1>Login</h1>
             <input
                 className="login-input"
                 type="text"

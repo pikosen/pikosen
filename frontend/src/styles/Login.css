@@ -1,17 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400..700;1,400..700&family=Neuton:ital,wght@0,200;0,300;0,400;0,700;0,800;1,400&family=Pathway+Gothic+One&display=swap');
 
-body {
+html, body {
   margin: 0;
   padding: 0;
   font-family: 'Neuton', serif;
   background-color: #fff9e3; 
   background-repeat: no-repeat;
-  background-position: center 150px;
+  background-position: center;
   background-size: cover;
   backdrop-filter: blur(6px);
   height: 100vh;
+  width: 100%;
   overflow: hidden;
   position: relative;
+  align-items: center;
   z-index: 0;
 }
 
@@ -54,28 +56,28 @@ body::before {
 }
 
 .appname {
-  font-size: 80px;
+  font-size: 70px;
   font-family: 'Neuton', serif;
   color: #76513b;
   letter-spacing: 10px;
-  margin: -40px 145px 5px 0px;
-  text-align: center;
+  margin: -60px -163px 5px 0px;
 }
 
 .main-logo-img {
-  height: 420px;
+  height: 450px;
+  max-height: 100%;
   max-width: 100%;
   object-fit: contain;
-  margin: -60px 163px 5px 0px;
+  margin: -130px -150px 5px 0px;
 }
 
 .slogan {
-  font-size: 30px;
+  font-size: 25px;
   font-family: 'Neuton', serif;
   color: #76513b;
   text-align: center;
   letter-spacing: -1px;
-  margin: -110px 163px 5px 0px;
+  margin: -180px -150px 5px 0px;
 }
 
 .login-form {
@@ -83,13 +85,12 @@ body::before {
   flex-direction: column;
   align-items: center;
   gap: 12px;
-  margin: 20px 163px 5px 0px;
-
+  margin: 10px -145px 0px 0px;
 }
 
 .login-form input {
   padding: 10px 16px;
-  border: 2px solid #000;
+  border: 1px solid #000;
   border-radius: 8px;
   font-size: 14px;
   font-family: 'Arimo', serif;
