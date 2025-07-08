@@ -3,8 +3,8 @@
 .register-container {
   background-color: #fff9a3;
   padding: 10px 60px 50px 60px;
-  width: 120%; 
-  max-width: 400px;
+  width: 100%; 
+  max-width: 600px;
   margin: 60px auto;
   margin-top: 40px; 
   border-radius: 10px;
@@ -15,7 +15,8 @@
 
 .register-container h2 {
   color: #ff6200;
-  margin-bottom: 20px;
+  margin-top: 50px;
+  margin-bottom: 30px;
   font-size: 30px;
   text-align: center;
   font-weight: bold;
@@ -24,7 +25,8 @@
 
 .register-form input[type="text"],
 .register-form input[type="email"],
-.register-form input[type="date"] {
+.register-form input[type="date"],
+.register-form input[type="number"] {
   display: block;
   width: 100%;
   padding: 10px 12px;
@@ -64,7 +66,7 @@
 }
 
 .register-form button {
-  width: 107%;
+  width: 30%;
   padding: 10px 12px;
   background-color: #ff6200;
   color: white;
@@ -73,14 +75,14 @@
   border-radius: 6px;
   font-size: 16px;
   cursor: pointer;
-  margin-left: -10px;
+  display: block;
+  margin: 40px auto 25px auto; 
   transition: background 0.3s ease;
   font-family: 'Arimo', serif;
 }
 
 .register-form button:hover {
   background-color: #e55b00;
-  margin-left: -10px;
 }
 
 .bg-coffee {

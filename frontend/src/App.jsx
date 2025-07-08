@@ -1,13 +1,19 @@
-import react from 'react'
+import React from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
 import Login from "./pages/login"
-import Register from "./pages/register"
+import Register from "./pages/Createaccount"
 import Home from "./pages/home"
 import NotFound from "./pages/notfound"
 import Products from "./pages/products"
-import ProtectedRoute from "./components/ProtectedRoute"
-import "./styles/Business_form.css"
+import Address from "./pages/Address"
+import CreateBusiness from "./pages/register"
+import AddingProduct from "./pages/AddProduct"
+import Dashboard from "./pages/dashboard"
+import AccountInfo from "./pages/AccountInfo"
+import "./styles/register.css"
 import "./styles/Home.css"
+import "./styles/Createaccount.css"
+import "./styles/Login.css"
 
 function Logout() {
   localStorage.clear()
@@ -16,17 +22,15 @@ function Logout() {
 
 function RegisterAndLogout() {
   localStorage.clear()
-  return <Register/>
+  return <Register />
 }
 
 function App() {
-
   return (
-    <>
-     <BrowserRouter>
+    <BrowserRouter>
       <Routes>
         <Route
-          path="/home"
+          path=""
           element={
               <Home />
           }
@@ -41,17 +45,35 @@ function App() {
           element={<RegisterAndLogout />}
         />
         <Route path="*"
-          element={<NotFound />} >
-        </Route>
+          element={<NotFound />} 
+        />
         <Route
           path="/products"
           element={
-              <Products />
-          }
-        />
-      </Routes>
+              <Products />}
+          />
+        <Route 
+            path="/address/:pk" 
+            element={<Address />} 
+          />
+        <Route
+            path="/addproduct/:pk"
+            element={<AddingProduct />}
+          />
+        <Route
+            path="/createbusiness/:pk"
+            element={<CreateBusiness />}
+          />
+          <Route
+            path="/dashboard/:pk"
+            element={<Dashboard />}
+          />
+          <Route 
+            path="/updateinfo/:pk"
+            element={<AccountInfo />}            
+          />
+        </Routes>
      </BrowserRouter>
-    </>
   )
 }
 

@@ -1,7 +1,8 @@
 import React from "react";
 import "../styles/Login.css";
-
-import LogoMain from "../assets/piko_logo_green.png";
+import MainForm from "../components/MainForm"
+import TopBar from "../components/TopBar"
+import LogoMain from "../assets/Final_logo.jpg";
 import LogoNav from "../assets/PS_logo_leaf_or.png";
 import ShoppingBag from "../assets/Shopping_bag.png";
 import AccountCircle from "../assets/account_circle.png";
@@ -23,30 +24,14 @@ const kapePositions = getRandomPositions(40);
 function LoginPage() {
   return (
     <div className="login-page bg-coffee">
-      {/* Navbar */}
-      <header className="navbar">
-        <div className="nav-left">
-          <img src={LogoNav} alt="PS Logo Leaf" className="logo-img" />
-        </div>
-        <div className="nav-right">
-          <input type="text" placeholder="Search..." className="search-box" />
-          <img src={ShoppingBag} alt="Shopping Bag Icon" className="nav-icon" />
-          <img src={AccountCircle} alt="Account Circle Icon" className="nav-icon" />
-        </div>
-      </header>
-
+      <TopBar />
       <div className="main">
+        <h2 className="appname">PIKOSEN</h2>
         <div className="coffee-logo">
           <img src={LogoMain} alt="Piko Logo Green" className="main-logo-img" />
         </div>
-        <h2 className="slogan">Brew a better day!</h2>
-        <button className="google-signin">
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
-            alt="Google G logo"
-          />
-          Sign-in with Google
-        </button>
+        <h3 className="slogan">Brew a better day!</h3>
+        <MainForm route="api/login/" method="login" />
       </div>
 
       <div className="kape-bg">
