@@ -10,10 +10,12 @@ import CreateBusiness from "./pages/register"
 import AddingProduct from "./pages/AddProduct"
 import Dashboard from "./pages/dashboard"
 import AccountInfo from "./pages/AccountInfo"
+import AboutUs from "./pages/AboutUs"
 import "./styles/register.css"
 import "./styles/Home.css"
 import "./styles/Createaccount.css"
 import "./styles/Login.css"
+import "./styles/AboutUs.css"
 
 function Logout() {
   localStorage.clear()
@@ -71,6 +73,10 @@ function App() {
           <Route 
             path="/updateinfo/:pk"
             element={<AccountInfo />}            
+          />
+          <Route
+            path="/about-us"
+            element={<AboutUs/>}
           />
         </Routes>
      </BrowserRouter>

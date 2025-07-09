@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import LogoNav from "../assets/PS_logo_leaf_or.png";
 import ShoppingBag from '../assets/Shopping_bag.png';
 import AccountCircle from '../assets/account_circle.png';
+import coffeecom from '../assets/coffee_com.png';
 
 const TopBar = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 600);
@@ -36,7 +37,7 @@ const TopBar = () => {
     },
     navLeft: {
       display: 'flex',
-      alignItems: 'Right',
+      alignItems: 'center',
       height: '100%',
     },
     logoImg: {
@@ -45,6 +46,12 @@ const TopBar = () => {
       objectFit: 'contain',
       marginTop: '-22px',
       marginLeft: '-95px'
+    },
+    navCenter: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: '20px',
+      height: '100%',
     },
     navRight: {
       display: 'flex',
@@ -79,6 +86,12 @@ const TopBar = () => {
           <img src={LogoNav} alt="Logo" style={styles.logoImg} />
         </Link>
       </div>
+      <div style={styles.navCenter}>
+        <Link to="/about-us" >
+          <img src= {coffeecom} alt="Coffee Com Logo" style={styles.logoImg} />
+        </Link>
+      </div>
+
       <div style={styles.navRight}>
         <input
           type="text"
