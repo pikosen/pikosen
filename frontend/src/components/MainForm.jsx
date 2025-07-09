@@ -1,31 +1,36 @@
-import { useState } from "react";
 import api from "../api";
 import { useNavigate, Link } from "react-router-dom";
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "../constants";
 import "../styles/Login.css";
+import { React, useState } from "react"
 
-function MainForm() {
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
-    const [loading, setLoading] = useState(false);
-    const navigate = useNavigate();
 
-    const handleSubmit = async (e) => {
-        setLoading(true);
-        e.preventDefault();
+function MainForm({route, method}) {
+    const [username, setUsername] = useState("")
+    const [password, setPassword] = useState("")
+    const [error, setError] = useState("")
+    const [loading, setLoading] = useState(false)
+    const navigate = useNavigate()
 
-        try {
-            const res = await api.post("api/token/", { username, password }); // Using a specific route for login
-            localStorage.setItem(ACCESS_TOKEN, res.data.access);
-            localStorage.setItem(REFRESH_TOKEN, res.data.refresh);
-            navigate("/updateinfo");
-        } catch (error) {
-            alert("Failed to log in: " + error.message);
-        } finally {
-            setLoading(false);
-        }
-    };
+  const handleSubmit = async (e) => {
+    setLoading(true)
+    e.preventDefault()
+    setError("")
 
+    try {
+      const res = await api.post(route, { username, password })
+      if ( method == "login" )
+        localStorage.setItem(ACCESS_TOKEN, res.data.access);
+        localStorage.setItem(REFRESH_TOKEN, res.data.refresh);
+        navigate("/")
+    }
+    catch (error){
+      alert(error)
+    }
+    finally {
+      setLoading(false)
+    }
+  }
     return (
         <form onSubmit={handleSubmit} className="login-form">
             <input

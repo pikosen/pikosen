@@ -1,5 +1,6 @@
 import React from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
+import ProtectedRoute from "./components/ProtectedRoute"
 import Login from "./pages/login"
 import Register from "./pages/Createaccount"
 import Home from "./pages/home"
@@ -43,6 +44,10 @@ function App() {
           element={<Login />}
         />
         <Route
+          path="/logout"
+          element={<Logout />}
+        />
+        <Route
           path="/register"
           element={<RegisterAndLogout />}
         />
@@ -56,23 +61,42 @@ function App() {
           />
         <Route 
             path="/address/:pk" 
-            element={<Address />} 
+            element={
+            <ProtectedRoute>
+              <Address />
+            </ProtectedRoute>
+              } 
           />
         <Route
             path="/addproduct/:pk"
-            element={<AddingProduct />}
+            element={
+            <ProtectedRoute>
+              <AddingProduct />
+            </ProtectedRoute>}
           />
         <Route
             path="/createbusiness/:pk"
-            element={<CreateBusiness />}
+            element={
+            <ProtectedRoute>
+              <CreateBusiness />
+            </ProtectedRoute>
+          }
           />
           <Route
-            path="/dashboard/:pk"
-            element={<Dashboard />}
+            path="/dashboard/"
+            element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+            }
           />
           <Route 
             path="/updateinfo/:pk"
-            element={<AccountInfo />}            
+            element={
+            <ProtectedRoute>
+              <AccountInfo />
+            </ProtectedRoute>
+            }
           />
           <Route
             path="/about-us"

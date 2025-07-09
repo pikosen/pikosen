@@ -38,6 +38,7 @@ function ProductForm({route}) {
         formData.append('productName', productName);
         formData.append('price', price);
         formData.append('stock', stock);
+        formData.append('origin', origin);
         formData.append('description', description);
         formData.append('type', type);
         formData.append('grams', grams);
