@@ -7,45 +7,48 @@ const coffeeData = {
   'Bean Voyage': {
     products: [
       {
-
         id: 1,
         name: 'Pasaporte Roast',
         image: 'https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=300&h=200&fit=crop',
         description: 'A journey through international appeal in every cup.',
-        flavorProfile: ['Rich', 'Bold', 'Smooth', 'International blend']
+        flavorProfile: ['Rich', 'Bold', 'Smooth', 'International blend'],
+        business: 'Bean Voyage'
       },
       {
         id: 2,
         name: 'Departure Drip',
         image: 'https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=300&h=200&fit=crop',
         description: 'Start your morning adventure with this energizing blend.',
-        flavorProfile: ['Energizing', 'Citrus notes', 'Medium roast', 'Bright finish']
+        flavorProfile: ['Energizing', 'Citrus notes', 'Medium roast', 'Bright finish'],
+        business: 'Bean Voyage'
       },
       {
         id: 3,
         name: "Roaster's Compass",
         image: 'https://images.unsplash.com/photo-1442512595331-e89e73853f31?w=300&h=200&fit=crop',
         description: 'Navigate your taste buds through complex flavor territories.',
-        flavorProfile: ['Complex', 'Dark roast', 'Chocolate undertones', 'Full-bodied']
+        flavorProfile: ['Complex', 'Dark roast', 'Chocolate undertones', 'Full-bodied'],
+        business: 'Bean Voyage'
       }
     ]
   },
   'Beanery': {
     products: [
       {
-        
         id: 4,
         name: 'House Blend',
         image: 'https://images.unsplash.com/photo-1497935586351-b67a49e012bf?w=300&h=200&fit=crop',
         description: 'Our signature coffee that started it all.',
-        flavorProfile: ['Balanced', 'Nutty', 'Medium roast', 'Classic taste']
+        flavorProfile: ['Balanced', 'Nutty', 'Medium roast', 'Classic taste'],
+        business: 'Beanery'
       },
       {
         id: 5,
         name: 'Morning Glory',
         image: 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=300&h=200&fit=crop',
         description: 'Perfect morning companion with bright acidity.',
-        flavorProfile: ['Bright', 'Fruity', 'Light roast', 'Morning perfect']
+        flavorProfile: ['Bright', 'Fruity', 'Light roast', 'Morning perfect'],
+        business: 'Beanery'
       }
     ]
   },
@@ -56,7 +59,8 @@ const coffeeData = {
         name: 'Science Blend',
         image: 'https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=300&h=200&fit=crop',
         description: 'Precisely crafted using scientific brewing methods.',
-        flavorProfile: ['Precise', 'Clean', 'Methodical', 'Perfect extraction']
+        flavorProfile: ['Precise', 'Clean', 'Methodical', 'Perfect extraction'],
+        business: 'Brewology'
       }
     ]
   }
@@ -105,7 +109,8 @@ const ProductCard = ({ product, onHover, onClick }) => (
 
 
 // Right Panel component
-const RightPanel = ({ selectedProduct, activeBuddy }) => (
+const RightPanel = ({ selectedProduct, activeBuddy, onAddToCart }) => (
+  
   <div className="right-panel">
     <h2 className="right-title">
       {selectedProduct?.name || `${activeBuddy}'s Coffee`}
@@ -131,6 +136,14 @@ const RightPanel = ({ selectedProduct, activeBuddy }) => (
             </li>
           ))}
         </ul>
+      )}
+      {selectedProduct && (
+        <button 
+          className="add-to-cart-btn"
+          onClick={() => onAddToCart(selectedProduct)}
+        >
+          Add to Cart
+        </button>
       )}
     </div>
   </div>
@@ -175,9 +188,28 @@ export default function Products() {
     setIsProductLocked(true);
   };
 
+  const handleAddToCart = (product) => {
+    const cartItem = {
+      id: product.id,
+      name: product.name,
+      business: product.business,
+      dateAdded: new Date().toLocaleDateString() // Or use a more precise date/time
+    };
+    const savedCart = JSON.parse(localStorage.getItem('cartItems')) || [];
+    const updatedCart = [...savedCart, cartItem];
+    localStorage.setItem('cartItems', JSON.stringify(updatedCart));
+    alert(`${product.name} added to cart!`);
+  };
+
   useEffect(() => {
     if (activeBuddy === 'Bean Voyage' && !selectedProduct && currentProducts.length > 0) {
       setSelectedProduct(currentProducts[0]);
+    } else if (!selectedProduct && currentProducts.length > 0) {
+      // If no product is selected but there are products for the active buddy, select the first one
+      setSelectedProduct(currentProducts[0]);
+    } else if (currentProducts.length === 0) {
+      // If there are no products for the active buddy, clear selected product
+      setSelectedProduct(null);
     }
   }, [activeBuddy, selectedProduct, currentProducts]);
 
@@ -214,6 +246,7 @@ export default function Products() {
           <RightPanel 
             selectedProduct={selectedProduct} 
             activeBuddy={activeBuddy}
+            onAddToCart={handleAddToCart}
           />
         </div>
       </div>

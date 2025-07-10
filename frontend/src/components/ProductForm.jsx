@@ -4,9 +4,8 @@ import { useNavigate, useParams } from "react-router-dom"
 import "../styles/AddProduct.css"; 
 
 function ProductForm({route}) {
-
-    const { pk } = useParams()
     
+    const [business, setBusiness] = useState(null)
     const [productName, setProductName] = useState("")
     const [price, setPrice] = useState("")
     const [stock, setStock] = useState("")
@@ -18,14 +17,16 @@ function ProductForm({route}) {
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        api.get(`addproduct/${ pk }`)
+        api.get(`api/getbusiness`)
         .then(res => {
             console.log(res.data)
+            setBusiness(res.data)
         })
         .catch(err=>{
             console.log(err.message)
         })
     }, [])
+
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -34,10 +35,22 @@ function ProductForm({route}) {
         // Create FormData for file uploads
         const formData = new FormData();
 
-        formData.append('business', pk);
+        let businessId;
+        if (Array.isArray(business)) {
+            // If account is an array, get the first item's id
+            businessId = business[0]?.id || business[0]?.pk || business[0];
+        } else {
+            // If account is an object, get its id
+            businessId = business.id || business.pk || business;
+        }
+
+         console.log('Business ID being sent:', businessId);
+
+        formData.append('business', businessId);
         formData.append('productName', productName);
         formData.append('price', price);
         formData.append('stock', stock);
+        formData.append('origin', origin);
         formData.append('description', description);
         formData.append('type', type);
         formData.append('grams', grams);

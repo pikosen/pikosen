@@ -4,19 +4,21 @@ import { useNavigate, useParams } from "react-router-dom"
 
 function BusinessForm({route}) {
 
-    const { pk } = useParams()
-
+    // Fix 1: Initialize account as null or empty array depending on expected structure
+    const [account, setAccount] = useState(null)
     const [businessName, setBusinessName] = useState("")
     const [businessDescription, setBusinessDescription] = useState("")
     const [businessContact, setBusinessContact] = useState("")
     const [businessLogo, setBusinessLogo] = useState(null)
     const [loading, setLoading] = useState (false)
-    const navigate = useNavigate
-
+    const navigate = useNavigate()
+    
     useEffect(() => {
-        api.get(`createbusiness/${pk}`)
+        api.get(`api/dashboard/account/`)
         .then(res => {
             console.log(res.data)
+            // Fix 2: Store the response data in state
+            setAccount(res.data)
         })
         .catch(err=>{
             console.log(err.message)
@@ -28,11 +30,30 @@ function BusinessForm({route}) {
         e.preventDefault()
         setLoading(true)
 
+        // Fix 3: Add validation to ensure we have account data
+        if (!account) {
+            alert('Account information not loaded. Please try again.');
+            setLoading(false);
+            return;
+        }
+
         // FIX: Use FormData to handle file uploads correctly.
         // This sets the request's Content-Type to 'multipart/form-data'.
         const formData = new FormData();
 
-        formData.append('owner', pk);
+        // Fix 4: Handle different possible account data structures
+        let ownerId;
+        if (Array.isArray(account)) {
+            // If account is an array, get the first item's id
+            ownerId = account[0]?.id || account[0]?.pk || account[0];
+        } else {
+            // If account is an object, get its id
+            ownerId = account.id || account.pk || account;
+        }
+
+        console.log('Owner ID being sent:', ownerId);
+        
+        formData.append('owner', ownerId);
         formData.append('businessName', businessName);
         formData.append('businessDescription', businessDescription);
         formData.append('businessContact', businessContact);
