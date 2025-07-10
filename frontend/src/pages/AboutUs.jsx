@@ -31,7 +31,7 @@ const AboutUs = () => {
       socialLinks: {
         github: "mjlnavarro",
       },
-      portfolioLink: "#"
+      portfolioLink: "https://mjlnavarro.github.io/Portfolio/"
     },
     {
       id: 4,

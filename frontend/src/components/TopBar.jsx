@@ -44,8 +44,19 @@ const TopBar = () => {
       maxHeight: '105px',
       width: 'auto',
       objectFit: 'contain',
-      marginTop: '-22px',
-      marginLeft: '-95px'
+      marginTop: '15px',
+      marginLeft: '-95px',
+      mask: `url(${LogoNav})`,
+      maskSize: 'contain',
+      maskRepeat: 'no-repeat',
+      maskPosition: 'center',
+    },
+    AboutlogoImg: {
+      maxHeight: '40px',
+      width: 'auto',
+      objectFit: 'contain',
+      marginTop: '-5px',
+      marginLeft: '1450px'
     },
     navCenter: {
       display: 'flex',
@@ -88,7 +99,7 @@ const TopBar = () => {
       </div>
       <div style={styles.navCenter}>
         <Link to="/about-us" >
-          <img src= {coffeecom} alt="Coffee Com Logo" style={styles.logoImg} />
+          <img src= {coffeecom} alt="Coffee Com Logo" style={styles.AboutlogoImg} />
         </Link>
       </div>
 
