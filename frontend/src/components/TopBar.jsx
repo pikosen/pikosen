@@ -1,131 +1,45 @@
-import React, { useState, useEffect } from 'react';
-import '../styles/TopBar.css'; 
-import { Link } from 'react-router-dom';
-import LogoNav from "../assets/PS_logo_leaf_or.png";
-import ShoppingBag from '../assets/Shopping_bag.png';
-import AccountCircle from '../assets/account_circle.png';
-import coffeecom from '../assets/coffee_com.png';
+import { useState, useEffect } from "react"
+import "../styles/TopBar.css"
+import { Link } from "react-router-dom"
+import LogoNav from "../assets/PS_logo_leaf_or.png"
+import ShoppingBag from "../assets/Shopping_bag.png"
+import AccountCircle from "../assets/account_circle.png"
+import coffeecom from "../assets/coffee_com.png"
 
 const TopBar = () => {
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 600);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768)
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth <= 600);
-    };
+      setIsMobile(window.innerWidth <= 768)
+    }
 
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  const styles = {
-    navbar: {
-      position: 'fixed',
-      top: 0,
-      left: 0,
-      width: '100%',
-      height: '50px',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-      padding: '0 5vw',
-      backgroundColor: '#fff9e3',
-      borderBottom: '1px solid #ff6200',
-      boxShadow: '0 2px 8px rgba(0, 0, 0, 0.08)',
-      zIndex: 1000,
-      boxSizing: 'border-box',
-    },
-    navLeft: {
-      display: 'flex',
-      alignItems: 'center',
-      height: '100%',
-    },
-    logoImg: {
-      maxHeight: '105px',
-      width: 'auto',
-      objectFit: 'contain',
-      marginTop: '15px',
-      marginLeft: '-95px',
-      mask: `url(${LogoNav})`,
-      maskSize: 'contain',
-      maskRepeat: 'no-repeat',
-      maskPosition: 'center',
-    },
-    AboutlogoImg: {
-      maxHeight: '40px',
-      width: 'auto',
-      objectFit: 'contain',
-      marginTop: '-5px',
-      marginLeft: '1450px'
-    },
-    navCenter: {
-      display: 'flex',
-      alignItems: 'center',
-      gap: '20px',
-      height: '100%',
-    },
-    navRight: {
-      display: 'flex',
-      alignItems: 'center',
-      gap: '10px',
-      height: '100%',
-      marginRight: '-57px'
-    },
-    navIcon: {
-      height: isMobile ? '24px' : '30px',
-      width: isMobile ? '24px' : '30px',
-      cursor: 'pointer',
-    },
-    searchBox: {
-      display: isMobile ? 'none' : 'block',
-      padding: '6px 12px',
-      border: '2px solid #ff6200',
-      borderRadius: '10px',
-      fontSize: '14px',
-      fontFamily: 'Arimo, sans-serif',
-      height: '36px',
-      width: '160px',
-      maxWidth: '40vw',
-      boxSizing: 'border-box',
-    },
-  };
+    window.addEventListener("resize", handleResize)
+    return () => window.removeEventListener("resize", handleResize)
+  }, [])
 
   return (
-    <div style={styles.navbar}>
-      <div style={styles.navLeft}>
-        <Link to="/">
-          <img src={LogoNav} alt="Logo" style={styles.logoImg} />
-        </Link>
-      </div>
-      <div style={styles.navCenter}>
-        <Link to="/about-us" >
-          <img src= {coffeecom} alt="Coffee Com Logo" style={styles.AboutlogoImg} />
+    <nav className="topbar">
+      <div className="topbar-left">
+        <Link to="/" className="logo-link">
+          <img src={LogoNav || "/placeholder.svg"} alt="PikoSen Logo" className="logo-image" />
         </Link>
       </div>
 
-      <div style={styles.navRight}>
-        <input
-          type="text"
-          placeholder="Search..."
-          style={styles.searchBox}
-        />
-        <Link to="/dashboard/pk:">
-          <img
-            src={ShoppingBag}
-            alt="Shopping Bag Icon"
-            style={styles.navIcon}
-          />
+      <div className="topbar-right">
+        <Link to="/about-us" className="about-link">
+          <img src={coffeecom || "/placeholder.svg"} alt="About Us" className="about-image" />
         </Link>
-        <Link to="/dashboard/pk:">
-          <img
-            src={AccountCircle}
-            alt="Account Circle Icon"
-            style={styles.navIcon}
-          />
+        {!isMobile && <input type="text" placeholder="Search coffee..." className="search-input" />}
+        <Link to="/products" className="nav-icon-link">
+          <img src={ShoppingBag || "/placeholder.svg"} alt="Products" className="nav-icon" />
+        </Link>
+        <Link to="/dashboard/1" className="nav-icon-link">
+          <img src={AccountCircle || "/placeholder.svg"} alt="Dashboard" className="nav-icon" />
         </Link>
       </div>
-    </div>
-  );
-};
+    </nav>
+  )
+}
 
-export default TopBar;
+export default TopBar

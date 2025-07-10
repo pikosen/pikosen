@@ -1,4 +1,4 @@
-.navbar {
+.topbar {
   position: fixed;
   top: 0;
   left: 0;
@@ -7,48 +7,119 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 20px;
+  padding: 0 2rem;
   background-color: #fff9e3;
-  border-bottom: 1px solid #ff6200;
+  border-bottom: 2px solid #ff6200;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   z-index: 1000;
+  box-sizing: border-box;
 }
 
-.nav-left {
+.topbar-left {
   display: flex;
-  align-items: right; 
+  align-items: center;
+  flex-shrink: 0;
 }
 
-.logo-img {
-  max-height: 30px;     
+.logo-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.logo-image {
+  height: 45px;
   width: auto;
-  margin: 10px 0 10px -10px; 
-  display: block;
   object-fit: contain;
 }
 
-.nav-right {
-  flex: 1;
+.topbar-center {
   display: flex;
-  justify-content: flex-end;
   align-items: center;
-  gap: 10px;
-  margin-top: 1.5px;
-  margin-bottom: 1.5px;
+  justify-content: center;
+  flex: 1;
+}
+
+.about-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.about-image {
+  height: 35px;
+  width: auto;
+  object-fit: contain;
+}
+
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-shrink: 0;
+}
+
+.search-input {
+  padding: 8px 16px;
+  border: 2px solid #ff6200;
+  border-radius: 10px;
+  font-size: 14px;
+  font-family: "Arimo", sans-serif;
+  background-color: #ffffff;
+  width: 200px;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.search-input:focus {
+  box-shadow: 0 0 0 3px rgba(255, 98, 0, 0.1);
+  border-color: #ff8c42;
+}
+
+.search-input::placeholder {
+  color: #999;
+}
+
+.nav-icon-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  padding: 8px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.nav-icon-link:hover {
+  background-color: rgba(255, 98, 0, 0.1);
 }
 
 .nav-icon {
-  height: 33px;
-  width: 33px;
-  margin-left: 20px;
+  height: 28px;
+  width: 28px;
+  object-fit: contain;
   cursor: pointer;
 }
 
-.search-box {
-  padding: 12px 20px;
-  border: 2px solid #ff6200;
-  border-radius: 10px;
-  width: 200px;
-  font-size: 14px;
-  font-family: 'Arimo', serif;
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .topbar {
+    padding: 0 1rem;
+  }
+
+  .topbar-right {
+    gap: 0.5rem;
+  }
+
+  .logo-image {
+    height: 35px;
+  }
+
+  .about-image {
+    height: 28px;
+  }
+
+  .nav-icon {
+    height: 24px;
+    width: 24px;
+  }
 }
