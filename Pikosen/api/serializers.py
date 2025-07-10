@@ -1,6 +1,9 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
 from .models import *
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
 
 class UserSerializer(serializers.ModelSerializer):
     confirm_password = serializers.CharField(write_only=True)  # Add as a serializer field, not model field
@@ -29,9 +32,22 @@ class UserSerializer(serializers.ModelSerializer):
         return user
 
 class AccountSerializer(serializers.ModelSerializer):
+    user_email = serializers.ReadOnlyField(source='user.email')
+
     class Meta:
         model = Account
-        fields = '__all__'
+        fields = [
+            'id', 'name', 'gender', 'age', 'contact', 'user_email',
+        ]
+
+class BusinessViewSerializer(serializers.ModelSerializer):
+    owner_name = serializers.ReadOnlyField(source='owner.name')
+
+    class Meta:
+        model = Business
+        fields = [
+            'id', 'businessName', 'businessContact', 'businessDescription', 'businessLogo', 'owner_name',
+        ]
 
 class BusinessSerializer(serializers.ModelSerializer):
     class Meta:
@@ -51,9 +67,4 @@ class ProductSerializer(serializers.ModelSerializer):
 class ImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Images
-        fields = '__all__'
-
-class RegUserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
         fields = '__all__'

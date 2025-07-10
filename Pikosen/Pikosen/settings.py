@@ -63,13 +63,13 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'Pikosen.urls'
@@ -151,5 +151,40 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CORS_ALLOW_ALL_ORIGINS = True
-CORS_ALLOWS_CREDENTIALS = True
+CORS_ALLOW_CREDENTIALS = True
+
+# Explicitly list your frontend origins
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173", # Your React development server
+    "http://127.0.0.1:5173", # Include this too, just in case your browser uses 127.0.0.1
+    # Add any other specific frontend origins here (e.g., for production deployment)
+    # "https://your-production-frontend.com",
+]
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=30), # Short-lived access token
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1), # Longer-lived refresh token
+    'ROTATE_REFRESH_TOKENS': True, # Recommended for security
+    'BLACKLIST_AFTER_ROTATION': True, # Recommended for security
+
+    'ALGORITHM': 'HS256',
+    'SIGNING_KEY': 'your-secret-key', # **CHANGE THIS IN PRODUCTION** - use a strong, random key
+    'VERIFYING_KEY': None,
+    'AUDIENCE': None,
+    'ISSUER': None,
+    'JWK_URL': None,
+    'LEEWAY': 0,
+
+    'AUTH_HEADER_TYPES': ('Bearer',),
+    'AUTH_HEADER_NAME': 'HTTP_AUTHORIZATION',
+    'USER_ID_FIELD': 'id',
+    'USER_ID_CLAIM': 'user_id',
+    'USER_AUTHENTICATION_RULE': 'rest_framework_simplejwt.authentication.default_user_authentication_rule',
+
+    'JTI_CLAIM': 'jti',
+    'TOKEN_TYPE_CLAIM': 'token_type',
+    'TOKEN_USER_CLASS': 'rest_framework_simplejwt.models.TokenUser',
+
+    'SLIDING_TOKEN_LIFETIME': timedelta(minutes=30),
+    'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
+}
