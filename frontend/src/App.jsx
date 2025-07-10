@@ -60,7 +60,7 @@ function App() {
               <Products />}
           />
         <Route 
-            path="/address/:pk" 
+            path="/address/" 
             element={
             <ProtectedRoute>
               <Address />
@@ -68,14 +68,14 @@ function App() {
               } 
           />
         <Route
-            path="/addproduct/:pk"
+            path="/addproduct/"
             element={
             <ProtectedRoute>
               <AddingProduct />
             </ProtectedRoute>}
           />
         <Route
-            path="/createbusiness/:pk"
+            path="/createbusiness/"
             element={
             <ProtectedRoute>
               <CreateBusiness />
@@ -91,7 +91,7 @@ function App() {
             }
           />
           <Route 
-            path="/updateinfo/:pk"
+            path="/updateinfo/"
             element={
             <ProtectedRoute>
               <AccountInfo />
