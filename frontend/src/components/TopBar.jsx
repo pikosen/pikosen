@@ -34,7 +34,7 @@ const TopBar = () => {
         <Link to="/products" className="nav-icon-link">
           <img src={ShoppingBag || "/placeholder.svg"} alt="Products" className="nav-icon" />
         </Link>
-        <Link to="/dashboard/1" className="nav-icon-link">
+        <Link to="/dashboard/" className="nav-icon-link">
           <img src={AccountCircle || "/placeholder.svg"} alt="Dashboard" className="nav-icon" />
         </Link>
       </div>
