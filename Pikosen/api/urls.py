@@ -6,6 +6,7 @@ from .views import ProductDashView
 
 urlpatterns = [
     path('bean-shops/', views.BeanShopView.as_view({'get': 'list'}), name="home"),
+    path('bean-shops/products/', views.BeanShopProductsView.as_view({'get': 'list'}), name="homeproducts"),
     path('user/register/', views.CreateUserView.as_view(), name="register"),
     path("createbusiness/", views.CreateBusinessView.as_view(), name="create_business"),
     path("productlisting/", views.ListProductView.as_view(), name="list_product"),

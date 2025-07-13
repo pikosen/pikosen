@@ -63,6 +63,16 @@ class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = '__all__'
+    
+
+class ProductDashSerializer(serializers.ModelSerializer):
+    business_name = serializers.ReadOnlyField(source='business.name')
+
+    class Meta:
+        model = Product
+        fields = [
+            'id', 'productName', 'price', 'stock', 'description', 'origin', 'type', 'business_name',
+        ]
 
 class ImageSerializer(serializers.ModelSerializer):
     class Meta:

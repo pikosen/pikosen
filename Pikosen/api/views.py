@@ -55,11 +55,16 @@ class BeanShopView(viewsets.ReadOnlyModelViewSet):
     serializer_class = BusinessSerializer
     permission_classes = [AllowAny]
 
+class BeanShopProductsView(viewsets.ReadOnlyModelViewSet):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+    permission_classes = [AllowAny]
+
 # Updated views.py - Replace your ProductDashView with this:
 
 class ProductDashView(viewsets.ModelViewSet):  # Changed from ReadOnlyModelViewSet to ModelViewSet
     queryset = Product.objects.all()
-    serializer_class = ProductSerializer
+    serializer_class = ProductDashSerializer
     permission_classes = [IsAuthenticated]  # Changed from AllowAny to IsAuthenticated
 
     def list(self, request):
