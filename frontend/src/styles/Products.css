@@ -54,25 +54,24 @@ body {
 
 .container {
   display: flex;
+  flex-direction: column;
   min-height: 100vh;
   height: 100vh;
-  padding-top: 60px;
+  padding-top: 0; /* Removed as main-layout will handle it */
   box-sizing: border-box;
 }
 
 .sidebar {
-  position: fixed;
-  top: 60px;
-  left: 0;
-  width: 12rem;
-  height: calc(100vh - 60px);
+  /* Removed fixed positioning */
+  width: 12rem; /* Fixed width for the sidebar */
+  height: 100%; /* Take full height of the flex container */
   background-color: #fff9e3;
   border-right: 2px solid #ff6200;
   display: flex;
   flex-direction: column;
   z-index: 1000;
   overflow-y: auto;
-  flex-shrink: 0;
+  flex-shrink: 0; /* Prevent shrinking */
 }
 
 .logo {
@@ -163,49 +162,48 @@ body {
   background: #e55100;
 }
 
+/* New wrapper for sidebar, main content, and right panel */
+.main-layout {
+  display: flex;
+  flex: 1; /* Takes all available vertical space in the container */
+  width: 100%;
+  overflow: hidden; /* To prevent horizontal scroll if content overflows */
+  background-color: #fff9e3;
+  padding-top: 60px; /* Pushes content below the fixed TopBar */
+}
+
+/* New wrapper for product grid and right panel */
+.center-and-right-panel {
+  display: flex;
+  flex: 1; /* Takes all available horizontal space in main-layout */
+  height: 100%; /* Takes full height of its parent */
+  overflow: hidden; /* Important for internal scrolling */
+}
+
 /* Main content area - FIXED */
-.main {
-  margin-left: 12rem;
-  margin-right: 20rem;
-  width: calc(100vw - 32rem);
-  height: calc(100vh - 60px);
-  overflow: hidden;
-  background-color: #fff9e3;
-  padding-top: 60px;
-}
-
-/* Content layout - FIXED */
-.content {
-  width: 100%;
-  height: calc(100vh - 60px);
-  display: block;
-  background-color: #fff9e3;
-}
-
-/* Center content - FIXED */
-.main-content {
-  width: 100%;
-  height: 100%;
-  padding: 1rem 2rem;
-  overflow-y: auto;
+.main-product-display {
+  flex: 1; /* Takes all available horizontal space in center-and-right-panel */
+  height: 100%; /* Takes full height of its parent */
+  padding: 1.5rem 2rem; /* Adjust padding as needed */
+  overflow-y: auto; /* Allow scrolling for product cards */
   box-sizing: border-box;
 }
 
 /* Scrollbar styling for main-content */
-.main-content::-webkit-scrollbar {
+.main-product-display::-webkit-scrollbar {
   width: 2px;
 }
 
-.main-content::-webkit-scrollbar-track {
+.main-product-display::-webkit-scrollbar-track {
   background: #fff9e3;
 }
 
-.main-content::-webkit-scrollbar-thumb {
+.main-product-display::-webkit-scrollbar-thumb {
   background: #ff6200;
   border-radius: 0px;
 }
 
-.main-content::-webkit-scrollbar-thumb:hover {
+.main-product-display::-webkit-scrollbar-thumb:hover {
   background: #e55100;
 }
 
@@ -271,17 +269,15 @@ body {
 
 /* Right panel - FIXED */
 .right-panel {
-  position: fixed;
-  right: 0;
-  top: 60px;
-  width: 20rem;
-  min-width: 20rem;
+  /* Removed fixed positioning */
+  width: 20rem; /* Fixed width for the right panel */
+  min-width: 20rem; /* Ensure it doesn't shrink below this */
   background-color: #fff9e3;
   padding: 1.5rem;
   color: #76513b;
   border-left: 2px solid #ff6200;
-  height: calc(100vh - 60px);
-  overflow-y: auto;
+  height: 100%; /* Take full height of the flex container */
+  overflow-y: auto; /* Allow scrolling for right panel content */
   z-index: 999;
   box-sizing: border-box;
 }
@@ -408,11 +404,6 @@ body {
     width: 18rem;
     min-width: 18rem;
   }
-
-  .main {
-    margin-right: 18rem;
-    width: calc(100vw - 30rem);
-  }
 }
 
 @media (max-width: 768px) {
@@ -446,31 +437,7 @@ body {
     flex-shrink: 0;
   }
 
-  .main {
-    margin-left: 0;
-    margin-right: 0;
-    width: 100%;
-    max-width: 100%;
-  }
-
-  .content {
-    flex-direction: column;
-  }
-
-  .right-panel {
-    position: relative;
-    top: auto;
-    right: auto;
-    width: 100%;
-    min-width: unset;
-    order: -1;
-    height: auto;
-    border-left: none;
-    border-bottom: 2px solid #ff6200;
-    padding-bottom: 1.5rem;
-  }
-
-  .main-content {
+  .main-product-display {
     padding: 1rem;
     height: auto;
   }
