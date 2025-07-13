@@ -167,9 +167,14 @@ function Dashboard() {
                   <div>
                     {Account.map((account) => (
                       <div key={account.id} className="profile-display">
-                        <div className="profile-avatar">
-                          <img src={`${baseURL}${account.profilePhoto}`} alt={`${account.name} photo`} />
-                        </div>
+                          <div
+                            className="profile-avatar"
+                            style={{
+                              backgroundImage: `url(${baseURL}${account.profilePhoto || "/placeholder.svg"})`, // Added placeholder for safety
+                              backgroundSize: "cover",
+                              backgroundPosition: "center",
+                            }}
+                          ></div>
                         <div className="profile-details">
                           <h2 className="profile-name">{account.name}</h2>
                           <p className="profile-contact">

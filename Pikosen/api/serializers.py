@@ -37,7 +37,7 @@ class AccountSerializer(serializers.ModelSerializer):
     class Meta:
         model = Account
         fields = [
-            'id', 'name', 'gender', 'age', 'contact', 'user_email',
+            'id', 'name', 'gender', 'age', 'contact', 'user_email', 'profilePhoto'
         ]
 
 class BusinessViewSerializer(serializers.ModelSerializer):
@@ -66,7 +66,7 @@ class ProductSerializer(serializers.ModelSerializer):
     
 
 class ProductDashSerializer(serializers.ModelSerializer):
-    business_name = serializers.ReadOnlyField(source='business.name')
+    business_name = serializers.ReadOnlyField(source='business.businessName')
 
     class Meta:
         model = Product

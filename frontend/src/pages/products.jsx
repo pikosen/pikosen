@@ -65,16 +65,28 @@ const RightPanel = ({ selectedProduct, activeBuddy, onAddToCart }) => (
         {selectedProduct?.description ||
           `Discover the finest coffee from ${activeBuddy.businessName || "this business"}`}
       </div>
-      {selectedProduct?.flavorProfile && ( // Assuming flavorProfile might come from backend or be derived
-        <ul className="bullet-list">
-          {selectedProduct.flavorProfile.map((flavor, i) => (
-            <li key={i} className="bullet-item">
-              <span className="bullet"></span>
-              <span>{flavor}</span>
-            </li>
-          ))}
-        </ul>
-      )}
+        {
+          selectedProduct?.type 
+          ? <ul className="bullet-list">
+              <li className="bullet-item">
+                <span className="bullet"></span>
+                <span>{selectedProduct?.type}</span>
+              </li>
+              <li className="bullet-item">
+                <span className="bullet"></span>
+                <span>{selectedProduct?.origin}</span>
+              </li>
+              <li className="bullet-item">
+                <span className="bullet"></span>
+                <span>{selectedProduct?.grams}g</span>
+              </li>
+              <li className="bullet-item">
+                <h3>Price:</h3>
+                <h3>P{selectedProduct?.price}</h3>
+              </li>
+            </ul>
+          : "No product information"
+        }
       {selectedProduct && (
         <button className="add-to-cart-btn" onClick={() => onAddToCart(selectedProduct)}>
           Add to Cart
