@@ -6,7 +6,7 @@ import { redirect, useNavigate, Link } from "react-router-dom"
 import api from "../api"
 import "../styles/Dashboard.css"
 
-const baseURL = "http://127.0.0.1:8000/"
+const baseURL = "https://pikosen-production.up.railway.app/"
 
 function Dashboard() {
   const [activeNav, setActiveNav] = useState("Add / Edit Products")
@@ -87,6 +87,10 @@ function Dashboard() {
       .catch((error) => {
         console.error("Error fetching account:", error)
       })
+      {Account.length === 0
+      ? navigate("/updateinfo")
+      : setLoading(true);
+      }
   }
 
   const deleteProduct = (id) => {

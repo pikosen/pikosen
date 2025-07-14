@@ -5,9 +5,9 @@ import { useNavigate, useParams } from "react-router-dom"
 function AccountForm({route}) {
 
     // --- STATE VARIABLES ---
-    const { pk } = useParams()
     
     // Form state variables
+    const [user, setUser] = useState(null)
     const [name, setName] = useState("")
     const [gender, setGender] = useState("")
     const [age, setAge] = useState("")
@@ -18,9 +18,11 @@ function AccountForm({route}) {
     const navigate = useNavigate()
 
     useEffect(() => {
-        api.get(`updateinfo/${pk}`)
+        api.get(`api/dashboard/account/`)
         .then(res => {
             console.log(res.data)
+            // Fix 2: Store the response data in state
+            setUser(res.data)
         })
         .catch(err=>{
             console.log(err.message)
@@ -34,7 +36,7 @@ function AccountForm({route}) {
         // Create FormData for file uploads
         const formData = new FormData();
 
-        formData.append('user', pk);
+        formData.append('user', user.id);
         formData.append('name', name);
         formData.append('gender', gender);
         formData.append('age', age);
