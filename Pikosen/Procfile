@@ -1,2 +1,2 @@
-web: gunicorn pikosen.wsgi --log-file
-web: python manage.py migrate && gunicorn pikosen.wsgi
+web: gunicorn Pikosen.wsgi --log-file
+web: python manage.py migrate && gunicorn Pikosen.wsgi
