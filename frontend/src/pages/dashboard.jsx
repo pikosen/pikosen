@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import TopBar from "../components/TopBar"
-import { useNavigate } from "react-router-dom"
+import { redirect, useNavigate, Link } from "react-router-dom"
 import api from "../api"
 import "../styles/Dashboard.css"
 
@@ -100,6 +100,7 @@ function Dashboard() {
         }
       })
       .catch((error) => alert(error))
+    setLoading(false)
     getProduct()
   }
 
@@ -194,6 +195,9 @@ function Dashboard() {
             {/* Products Section */}
             <div className="content-header">
               <h3 className="content-title">My Products</h3>
+              <Link to="/addproduct">
+                <button className="add-button">Add Product</button>
+              </Link>
             </div>
 
             {loading ? (

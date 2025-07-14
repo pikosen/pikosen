@@ -177,8 +177,10 @@
 }
 
 .content-header {
+  display: flex;
   border-bottom: 1px solid #ff6200;
   padding-bottom: 0.5rem;
+  justify-content: space-between;
 }
 
 .content-title {

@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import "../styles/Products.css"
 import TopBar from "../components/TopBar"
 import api from "../api"
+import { redirect } from "react-router-dom"
 
 // Sidebar component
 const Sidebar = ({ buddy, activeIndex, onItemClick }) => (
@@ -47,7 +48,7 @@ const ProductCard = ({ product, onHover, onClick }) => {
 }
 
 // Right Panel component
-const RightPanel = ({ selectedProduct, activeBuddy, onAddToCart }) => (
+const RightPanel = ({ selectedProduct, activeBuddy, handleSubmit }) => (
   <div className="right-panel">
     <h2 className="right-title">
       {selectedProduct?.productName || `${activeBuddy.businessName || "Selected"}'s Coffee`}
@@ -88,10 +89,12 @@ const RightPanel = ({ selectedProduct, activeBuddy, onAddToCart }) => (
           : "No product information"
         }
       {selectedProduct && (
-        <button className="add-to-cart-btn" onClick={() => onAddToCart(selectedProduct)}>
+      <form onSubmit={handleSubmit} className="product-edit-form">
+        <button type="submit" className="add-to-cart-btn">
           Add to Cart
         </button>
-      )}
+      </form>
+    )}
     </div>
   </div>
 )
@@ -99,12 +102,28 @@ const RightPanel = ({ selectedProduct, activeBuddy, onAddToCart }) => (
 export default function Products() {
   const [Business, setBusiness] = useState([])
   const [Product, setProduct] = useState([])
+  const [Account, setAccount] = useState(null)
+  const [accountLoading, setAccountLoading] = useState(true)
   const [isProductLocked, setIsProductLocked] = useState(false)
   const [activeIndex, setActiveIndex] = useState(0)
   const [selectedProduct, setSelectedProduct] = useState(null)
+  const [loading, setLoading] = useState(false)
 
   const activeBuddy = Business[activeIndex] || {}
   const currentProducts = activeBuddy?.id ? Product.filter((product) => product.business === activeBuddy.id) : []
+  
+  const getAccount = () => {
+    api
+      .get(`api/dashboard/account/`)
+      .then((res) => {
+        setAccount(res.data)
+        console.log(res.data)
+      })
+      .catch((error) => {
+        console.error("Error fetching account:", error)
+      })
+      setAccountLoading(false)
+  }
 
   const getProduct = () => {
     api
@@ -133,6 +152,7 @@ export default function Products() {
   useEffect(() => {
     getProduct()
     getBusiness()
+    getAccount()
   }, [])
 
   const handleSidebarClick = (index) => {
@@ -152,18 +172,37 @@ export default function Products() {
     setIsProductLocked(true)
   }
 
-  const handleAddToCart = (product) => {
-    const cartItem = {
-      id: product.id,
-      name: product.productName, // Use productName from backend
-      business: product.business,
-      dateAdded: new Date().toLocaleDateString(), // Or use a more precise date/time
-    }
-    const savedCart = JSON.parse(localStorage.getItem("cartItems")) || []
-    const updatedCart = [...savedCart, cartItem]
-    localStorage.setItem("cartItems", JSON.stringify(updatedCart))
-    alert(`${product.productName} added to cart!`)
+  const handleSubmit = async (e) => {
+  e.preventDefault()
+  setLoading(true)
+
+  // Debug what we have
+  console.log("Account:", Account)
+  console.log("Account.id:", Account[0].id)
+  console.log("selectedProduct:", selectedProduct?.id)
+
+
+  const formData = new FormData()
+  formData.append('customer', Account[0].id);
+  formData.append('item', selectedProduct?.id);
+  formData.append('isOrdered', 1);
+  formData.append('isDelivered', 0);
+
+  try {
+    const res = await api.post(`api/bean-shops/products/cart/`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    })
+    console.log("Product added successfully:", res.data)
+    alert(`${selectedProduct.productName} added to cart!`)
+  } catch (error) {
+    console.error("Error adding product:", error)
+    alert(`Error: ${error.response?.data?.message || error.message}`)
+  } finally {
+    setLoading(false)
   }
+}
 
   useEffect(() => {
     // When activeBuddy or currentProducts change, try to set a default selected product
@@ -205,7 +244,8 @@ export default function Products() {
               )}
             </div>
           </div>
-          <RightPanel selectedProduct={selectedProduct} activeBuddy={activeBuddy} onAddToCart={handleAddToCart} />
+          <RightPanel selectedProduct={selectedProduct} activeBuddy={activeBuddy} handleSubmit={handleSubmit} />
+          
         </div>
       </div>
     </div>

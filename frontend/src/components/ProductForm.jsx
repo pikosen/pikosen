@@ -15,6 +15,7 @@ function ProductForm({route}) {
     const [grams, setGrams] = useState("")
     const [mainImg, setMainImg] = useState("")
     const [loading, setLoading] = useState(false);
+    const navigate = useNavigate()
 
     useEffect(() => {
         api.get(`api/getbusiness`)
@@ -22,11 +23,12 @@ function ProductForm({route}) {
             console.log(res.data)
             setBusiness(res.data)
         })
-        .catch(err=>{
-            console.log(err.message)
-        })
+        {
+            business === null
+            ? navigate("/createbusiness")
+            : setLoading(true);
+        }
     }, [])
-
 
     const handleSubmit = async (e) => {
         e.preventDefault()

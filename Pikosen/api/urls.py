@@ -17,4 +17,5 @@ urlpatterns = [
     path("product/update/<int:pk>", views.ProductDashView.as_view({'put': 'update'}), name="update_product"),
     path("product/delete/<int:pk>", views.ProductDashView.as_view({'delete': 'destroy'}), name="delete_product"),
     path("dashboard/account/", views.AccountDashView.as_view({'get': 'list'}), name="dashaccount"),
+    path("bean-shops/products/cart/", views.AddToCartView.as_view(), name="cart"),
 ]

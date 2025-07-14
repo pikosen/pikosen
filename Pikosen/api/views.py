@@ -60,6 +60,11 @@ class BeanShopProductsView(viewsets.ReadOnlyModelViewSet):
     serializer_class = ProductSerializer
     permission_classes = [AllowAny]
 
+class AddToCartView(generics.CreateAPIView):
+    queryset = Cart.objects.all()
+    serializer_class = CartSerializer
+    permission_classes = [IsAuthenticated]
+
 # Updated views.py - Replace your ProductDashView with this:
 
 class ProductDashView(viewsets.ModelViewSet):  # Changed from ReadOnlyModelViewSet to ModelViewSet

@@ -64,6 +64,10 @@ class ProductSerializer(serializers.ModelSerializer):
         model = Product
         fields = '__all__'
     
+class CartSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Cart
+        fields = '__all__'
 
 class ProductDashSerializer(serializers.ModelSerializer):
     business_name = serializers.ReadOnlyField(source='business.businessName')
