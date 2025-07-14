@@ -5,9 +5,9 @@ import { useNavigate, useParams } from "react-router-dom"
 function AccountForm({route}) {
 
     // --- STATE VARIABLES ---
-    const { pk } = useParams()
     
     // Form state variables
+    const [user, setUser] = useState(null)
     const [name, setName] = useState("")
     const [gender, setGender] = useState("")
     const [age, setAge] = useState("")
@@ -18,9 +18,11 @@ function AccountForm({route}) {
     const navigate = useNavigate()
 
     useEffect(() => {
-        api.get(`updateinfo/${pk}`)
+        api.get(`api/account/user/`)
         .then(res => {
             console.log(res.data)
+            // Fix 2: Store the response data in state
+            setUser(res.data)
         })
         .catch(err=>{
             console.log(err.message)
@@ -34,7 +36,18 @@ function AccountForm({route}) {
         // Create FormData for file uploads
         const formData = new FormData();
 
-        formData.append('user', pk);
+        let userId;
+        if (Array.isArray(user)) {
+            // If account is an array, get the first item's id
+            userId = user[0]?.id || user[0]?.pk || user[0];
+        } else {
+            // If account is an object, get its id
+            userId = user.id || user.pk || user;
+        }
+
+        console.log('User ID being sent:', userId);
+
+        formData.append('user', userId);
         formData.append('name', name);
         formData.append('gender', gender);
         formData.append('age', age);
@@ -57,14 +70,14 @@ function AccountForm({route}) {
                 },
             });
 
-            console.log("Account created successfully:", res.data);
-            navigate('/dashboard'); 
+            console.log("Account created successfully:", res.data); 
             
         } catch(error) {
             console.error("Error creating account:", error);
             console.error("Error details:", error.response?.data);
             alert(`Error: ${error.message}`);
         } finally {
+            navigate('/dashboard')
             setLoading(false)
         }
     }

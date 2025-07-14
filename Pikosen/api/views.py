@@ -21,7 +21,7 @@ class CreateUserView(generics.CreateAPIView):
 
 class CreateAccountView(generics.CreateAPIView):
     queryset = Account.objects.all()
-    serializer_class = AccountSerializer
+    serializer_class = AccountUserSerializer
     permission_classes = [IsAuthenticated]
 
 class ListProductView(generics.CreateAPIView):
@@ -53,6 +53,11 @@ class InputAddressView(generics.CreateAPIView):
 class BeanShopView(viewsets.ReadOnlyModelViewSet):
     queryset = Business.objects.all()
     serializer_class = BusinessSerializer
+    permission_classes = [AllowAny]
+
+class UserAccountView(viewsets.ReadOnlyModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
     permission_classes = [AllowAny]
 
 class BeanShopProductsView(viewsets.ReadOnlyModelViewSet):
