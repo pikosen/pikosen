@@ -4,7 +4,5 @@ import react from '@vitejs/plugin-react';
 export default defineConfig({
   plugins: [react()],
   build: { outDir: 'docs' },
-  server: {
-    historyApiFallback: true, 
-  },
+  server: { historyApiFallback: true, },
 });
