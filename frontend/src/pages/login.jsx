@@ -1,58 +1,77 @@
-import React from "react";
-import "../styles/Login.css";
+import "../styles/Login.css"
 import MainForm from "../components/MainForm"
 import TopBar from "../components/TopBar"
-import LogoMain from "../assets/Final_logo.jpg";
-import LogoNav from "../assets/PS_logo_leaf_or.png";
-import ShoppingBag from "../assets/Shopping_bag.png";
-import AccountCircle from "../assets/account_circle.png";
+import Pikosen from "../assets/Group 29 (3).png" 
 
-function getRandomPositions(count) {
-  const positions = [];
-  for (let i = 0; i < count; i++) {
-    const top = Math.floor(Math.random() * 80 + 20);
-    const left = Math.floor(Math.random() * 100);
-    if (top > 20 && top < 60 && left > 30 && left < 70) continue;
-    const rotation = Math.floor(Math.random() * 60 - 30);
-    positions.push({ top, left, rotation });
+function getRandomKapePositions(count) {
+  const positions = []
+  const safeZone = {
+    xMin: 25,
+    xMax: 75,
+    yMin: 20,
+    yMax: 80,
   }
-  return positions.slice(0, count);
+
+  for (let i = 0; i < count; i++) {
+    let top, left, rotation
+    let attempts = 0
+    do {
+      top = Math.floor(Math.random() * 100)
+      left = Math.floor(Math.random() * 100)
+      rotation = Math.floor(Math.random() * 60 - 30)
+      attempts++
+      if (attempts > 1000) {
+        break
+      }
+    } while (top > safeZone.yMin && top < safeZone.yMax && left > safeZone.xMin && left < safeZone.xMax)
+
+    if (attempts <= 1000) {
+      positions.push({
+        top,
+        left,
+        rotation,
+        delay: Math.random() * 4,
+        id: Math.random()
+      })
+    }
+  }
+  return positions
 }
 
-const kapePositions = getRandomPositions(40);
+const kapePositions = getRandomKapePositions(30) 
 
 function LoginPage() {
   return (
-    <div className="login-page bg-coffee">
+    <div className="login-page">
       <TopBar />
       <div className="main">
-        <h2 className="appname">PIKOSEN</h2>
-        <div className="coffee-logo">
-          <img src={LogoMain} alt="Piko Logo Green" className="main-logo-img" />
+        {/* Replaced old logo and title with the new combined logo */}
+        <div className="combined-logo-wrapper">
+          <img src={Pikosen || "/placeholder.svg"} alt="PikoSen Logo" className="combined-logo-img" />
         </div>
         <h3 className="slogan">Brew a better day!</h3>
         <MainForm route="api/token/" method="login" />
       </div>
 
       <div className="kape-bg">
-        {kapePositions.map((pos, index) => (
+        {kapePositions.map((pos) => (
           <span
-            key={index}
+            key={pos.id}
+            className="kape-text"
             style={{
               top: `${pos.top}%`,
               left: `${pos.left}%`,
               transform: `rotate(${pos.rotation}deg)`,
               position: "absolute",
+              animationDelay: `${pos.delay}s`,
             }}
           >
             kape?
           </span>
         ))}
       </div>
-
-      <div className="beans-footer"></div>
     </div>
-  );
+  )
 }
 
-export default LoginPage;
+export default LoginPage

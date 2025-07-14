@@ -1,14 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400..700;1,400..700&family=Neuton:ital,wght@0,200;0,300;0,400;0,700;0,800;1,400&family=Pathway+Gothic+One&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400..700;1,400..700&family=Neuton:ital,wght@0,200;0,300;0,400;0,700;0,800;1,400&family=Pathway+Gothic+One&display=swap");
 
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
-  font-family: 'Neuton', serif;
-  background-color: #fff9e3; 
+  font-family: "Neuton", serif;
+  background-color: #fff9e3; /* Light beige background */
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  backdrop-filter: blur(6px);
+  /* Removed backdrop-filter: blur(6px); */
   height: 100vh;
   width: 100%;
   overflow: hidden;
@@ -18,24 +19,26 @@ html, body {
 }
 
 body::before {
-  content: '';
+  content: "";
   position: fixed;
   top: 0;
   left: 0;
   height: 100%;
   width: 100%;
-  background-color: rgba(255, 255, 255, 0.04); 
-  z-index: -1; 
+  background-color: rgba(255, 255, 255, 0.04);
+  z-index: -1;
   pointer-events: none;
 }
 
-.page {
+.login-page {
+  /* Renamed from .page for clarity */
   display: flex;
   flex-direction: column;
   height: 100vh;
   position: relative;
   overflow: hidden;
   z-index: 2;
+  background-color: #fff9e3; /* Ensure the page itself has the background color */
 }
 
 .main {
@@ -44,40 +47,36 @@ body::before {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding-top: 80px; 
+  padding-top: 80px; /* Account for TopBar height */
   z-index: 2;
-  gap: 0px; 
+  gap: 0px;
+  /* Removed transform: translateX(-80px); */
 }
 
-.coffee-logo {
+/* New combined logo styles */
+.combined-logo-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 0px; /* Space below the logo */
 }
 
-.appname {
-  font-size: 70px;
-  font-family: 'Neuton', serif;
-  color: #76513b;
-  letter-spacing: 10px;
-  margin: -60px -163px 5px 0px;
-}
-
-.main-logo-img {
-  height: 450px;
-  max-height: 100%;
-  max-width: 100%;
+.combined-logo-img {
+  height: 150px; /* Adjust size as needed */
+  width: auto;
   object-fit: contain;
-  margin: -130px -150px 5px 0px;
+  margin: 0; /* Reset any previous margins */
 }
+
+/* Removed .appname and .coffee-logo styles */
 
 .slogan {
-  font-size: 25px;
-  font-family: 'Neuton', serif;
+  font-size: 36px;
+  font-family: "Neuton", serif;
   color: #76513b;
   text-align: center;
   letter-spacing: -1px;
-  margin: -180px -150px 5px 0px;
+  margin: 0px 0 30px 0; /* Adjusted margin for spacing */
 }
 
 .login-form {
@@ -85,15 +84,15 @@ body::before {
   flex-direction: column;
   align-items: center;
   gap: 12px;
-  margin: 10px -145px 0px 0px;
+  margin: 0; /* Reset any previous margins */
 }
 
 .login-form input {
   padding: 10px 16px;
-  border: 1px solid #000;
+  border: 1px solid #d0a556;
   border-radius: 8px;
   font-size: 14px;
-  font-family: 'Arimo', serif;
+  font-family: "Arimo", serif;
   width: 240px;
 }
 
@@ -102,65 +101,72 @@ body::before {
   flex-direction: column;
   align-items: center;
   gap: 10px;
-  margin: 5px 7px 5px 0px;
+  margin: 20px 0 0 0; /* Adjusted margin for spacing */
 }
 
-.login-buttons button,
-.login-buttons .signup-btn {
-  background-color: #ff6200;
-  color: #000;
+.login-buttons button {
+  /* Styles for the "Login" button */
+  background-color: #222222; /* Dark background */
+  color: #fff; /* White text */
   font-size: 14px;
-  padding: 10px 20px;
+  padding: 10px 16px;
   border: 0;
   border-radius: 6px;
   cursor: pointer;
-  font-family: 'Neuton', sans-serif;
+  font-family: "Arimo", sans-serif;
   text-decoration: none;
-  width: 127px;
+  width: 240px;
   text-align: center;
+  transition: background-color 0.3s ease;
 }
 
-.login-buttons button:hover,
-.login-buttons .signup-btn:hover {
-  background-color: #da641c;
+.login-buttons button:hover {
+  background-color: #423e3e; /* Slightly lighter on hover */
 }
 
-.kape-bg {
-  position: absolute;
-  top: 80px;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 0; 
-  pointer-events: none;
-  overflow: hidden;
+/* New styles for the signup prompt text */
+.signup-prompt {
+  font-size: 12px;
+  color: #76513b;
+  margin-top: 0px; /* Space above */
 }
 
-.kape-bg span {
+.signup-prompt .signup-link {
+  color: #ff6200;
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+.signup-prompt .signup-link:hover {
+  color: #cf7c45;
+}
+
+.kape-bg span.kape-text {
   position: absolute;
   color: #ff6200;
   font-size: 28px;
-  opacity: 0.5;
+  opacity: 0;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  animation: float 6s ease-in-out infinite;
+  animation: kapePop 6s ease-in-out infinite;
 }
 
-@keyframes float {
-  0%   { transform: translateY(0); }
-  50%  { transform: translateY(-6px); }
-  100% { transform: translateY(0); }
-}
-
-.beans-footer {
-  height: 150px;
-  background-repeat: repeat-x;
-  background-size: auto 80%;
-  background-position: bottom;
-  position: absolute;
-  bottom: 0;
-  width: 70%;
-  opacity: 0.25;
-  z-index: -1;
+@keyframes kapePop {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  25% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  75% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
 }
 
 @media (max-width: 600px) {
@@ -170,17 +176,15 @@ body::before {
     padding: 8px 12px;
   }
 
-  .main-logo-img {
-    height: 180px;
+  .combined-logo-img {
+    height: 120px; /* Adjust for smaller screens */
   }
 
   .slogan {
     font-size: 20px;
   }
-}
-.main-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  transform: translateX(-80px); 
+
+  .login-form input {
+    width: 200px; /* Adjust input width for smaller screens */
+  }
 }

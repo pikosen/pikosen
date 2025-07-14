@@ -53,7 +53,12 @@ function MainForm({route, method}) {
                 <button className="login-btn" type="submit" disabled={loading}>
                 {loading ? "Logging in..." : "Login"}
                 </button>
-                <Link className="signup-btn" to="/register">Signup</Link>
+                <p className="signup-prompt">
+                  Don't have an account yet?{" "}
+                  <a href="/register" className="signup-link">
+                    Sign up here!
+                  </a>
+                </p>
             </div>
         </form>
     );
