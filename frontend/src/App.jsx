@@ -49,7 +49,7 @@ function App() {
         />
         <Route
           path="/register"
-          element={<RegisterAndLogout />}
+          element={<Register />}
         />
         <Route path="*"
           element={<NotFound />} 
