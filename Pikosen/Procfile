@@ -1,0 +1,2 @@
+web: uvicorn Pikosen.asgi:application --host 0.0.0.0 --port $PORT --workers 4 --timeout-keep-alive 120
+release: python manage.py migrate
