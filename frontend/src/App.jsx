@@ -30,7 +30,7 @@ function RegisterAndLogout() {
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/pikosen">
       <Routes>
         <Route
           path=""
