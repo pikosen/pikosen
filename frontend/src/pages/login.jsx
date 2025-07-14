@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import "../styles/Login.css"
 import MainForm from "../components/MainForm"
 import TopBar from "../components/TopBar"
@@ -6,10 +7,10 @@ import Pikosen from "../assets/Group 29 (3).png"
 function getRandomKapePositions(count) {
   const positions = []
   const safeZone = {
-    xMin: 25,
-    xMax: 75,
-    yMin: 20,
-    yMax: 80,
+    xMin: 20,
+    xMax: 80,
+    yMin: 10,
+    yMax: 90,
   }
 
   for (let i = 0; i < count; i++) {
@@ -30,7 +31,7 @@ function getRandomKapePositions(count) {
         top,
         left,
         rotation,
-        delay: Math.random() * 4,
+        delay: Math.random() * 8,
         id: Math.random()
       })
     }
@@ -38,14 +39,34 @@ function getRandomKapePositions(count) {
   return positions
 }
 
-const kapePositions = getRandomKapePositions(30) 
-
 function LoginPage() {
+  const [kapePositions, setKapePositions] = useState([])
+
+  useEffect(() => {
+    setKapePositions(getRandomKapePositions(30))
+
+    const spawnNewKape = () => {
+      const newKape = getRandomKapePositions(1)[0]
+      if (newKape) {
+        setKapePositions(prev => [...prev, newKape])
+        
+        setTimeout(() => {
+          setKapePositions(prev => prev.filter(pos => pos.id !== newKape.id))
+        }, 6000) 
+      }
+    }
+
+    const spawnInterval = setInterval(() => {
+      spawnNewKape()
+    }, 2000 + Math.random() * 3000) // Random interval between 2-5 seconds
+
+    return () => clearInterval(spawnInterval)
+  }, [])
+
   return (
     <div className="login-page">
       <TopBar />
       <div className="main">
-        {/* Replaced old logo and title with the new combined logo */}
         <div className="combined-logo-wrapper">
           <img src={Pikosen || "/placeholder.svg"} alt="PikoSen Logo" className="combined-logo-img" />
         </div>
