@@ -21,7 +21,7 @@ class CreateUserView(generics.CreateAPIView):
 
 class CreateAccountView(generics.CreateAPIView):
     queryset = Account.objects.all()
-    serializer_class = AccountSerializer
+    serializer_class = AccountUserSerializer
     permission_classes = [IsAuthenticated]
 
 class ListProductView(generics.CreateAPIView):
