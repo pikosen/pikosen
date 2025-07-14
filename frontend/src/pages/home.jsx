@@ -3,7 +3,7 @@ import '../styles/Home.css';
 import api from "../api"
 import TopBar from '../components/TopBar';
 
-const baseURL = "https://pikosen-production.up.railway.app/"
+const baseURL = "https://pikosen.vercel.app/"
 
 const Home = () => {
     const [Business, setBusiness] = useState([])
