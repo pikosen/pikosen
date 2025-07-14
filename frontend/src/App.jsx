@@ -51,9 +51,6 @@ function App() {
           path="/register/"
           element={<Register />}
         />
-        <Route path="*"
-          element={<NotFound />} 
-        />
         <Route
           path="/products/"
           element={
@@ -101,6 +98,9 @@ function App() {
           <Route
             path="/about-us"
             element={<AboutUs/>}
+          />
+          <Route path="*"
+            element={<NotFound />} 
           />
         </Routes>
      </BrowserRouter>
