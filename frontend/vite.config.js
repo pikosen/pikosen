@@ -6,4 +6,5 @@ export default defineConfig({
   base: '/pikosen/',
   build: { outDir: 'docs' },
   server: { historyApiFallback: true, },
+  base: process.env.VITE_BASE_PATH || "/pikosen"
 });
