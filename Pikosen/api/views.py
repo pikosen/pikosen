@@ -55,6 +55,11 @@ class BeanShopView(viewsets.ReadOnlyModelViewSet):
     serializer_class = BusinessSerializer
     permission_classes = [AllowAny]
 
+class UserAccountView(viewsets.ReadOnlyModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = [AllowAny]
+
 class BeanShopProductsView(viewsets.ReadOnlyModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
