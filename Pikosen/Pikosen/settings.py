@@ -162,7 +162,6 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173", # Your React development server
     "http://127.0.0.1:5173", # Include this too, just in case your browser uses 127.0.0.1
     # Add any other specific frontend origins here (e.g., for production deployment)
-    "https://pikosen.github.io/pikosen/"
     "https://pikosen.vercel.app/"
 ]
 
