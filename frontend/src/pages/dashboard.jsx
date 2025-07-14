@@ -87,7 +87,7 @@ function Dashboard() {
       .catch((error) => {
         console.error("Error fetching account:", error)
       })
-      {Account.length === 0
+      {Account === null
       ? navigate("/updateinfo")
       : setLoading(true);
       }
@@ -164,9 +164,7 @@ function Dashboard() {
             {/* Profile Section */}
             <section className="profile-header">
               <div className="profile-info">
-                {loading ? (
-                  <p>Loading account...</p>
-                ) : Account.length === 0 ? (
+                {Account.length === 0 ? (
                   "No account found"
                 ) : (
                   <div>
@@ -204,9 +202,7 @@ function Dashboard() {
               </Link>
             </div>
 
-            {loading ? (
-              <p>Loading products...</p>
-            ) : Product.length === 0 ? (
+            {Product.length === 0 ? (
               <p>No products found. Add some products to get started!</p>
             ) : (
               <div className="products-list">

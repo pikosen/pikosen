@@ -70,14 +70,14 @@ function AccountForm({route}) {
                 },
             });
 
-            console.log("Account created successfully:", res.data);
-            navigate('/dashboard'); 
+            console.log("Account created successfully:", res.data); 
             
         } catch(error) {
             console.error("Error creating account:", error);
             console.error("Error details:", error.response?.data);
             alert(`Error: ${error.message}`);
         } finally {
+            navigate('/dashboard')
             setLoading(false)
         }
     }
