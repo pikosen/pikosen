@@ -31,7 +31,7 @@ const TopBar = () => {
           <img src={coffeecom || "/placeholder.svg"} alt="About Us" className="about-image" />
         </Link>
         {!isMobile && <input type="text" placeholder="Search coffee..." className="search-input" />}
-        <Link to="/products" className="nav-icon-link">
+        <Link to="/products/" className="nav-icon-link">
           <img src={ShoppingBag || "/placeholder.svg"} alt="Products" className="nav-icon" />
         </Link>
         <Link to="/dashboard/" className="nav-icon-link">

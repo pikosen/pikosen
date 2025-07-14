@@ -55,9 +55,9 @@ function MainForm({route, method}) {
                 </button>
                 <p className="signup-prompt">
                   Don't have an account yet?{" "}
-                  <a href="/Createaccount" className="signup-link">
+                  <Link to="/register/" className="signup-link">
                     Sign up here!
-                  </a>
+                  </Link>
                 </p>
             </div>
         </form>
