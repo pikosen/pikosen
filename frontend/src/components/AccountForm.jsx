@@ -18,7 +18,7 @@ function AccountForm({route}) {
     const navigate = useNavigate()
 
     useEffect(() => {
-        api.get(`api/dashboard/account/`)
+        api.get(`api/account/user/`)
         .then(res => {
             console.log(res.data)
             // Fix 2: Store the response data in state
@@ -36,7 +36,7 @@ function AccountForm({route}) {
         // Create FormData for file uploads
         const formData = new FormData();
 
-        formData.append('user', user.id);
+        formData.append('user', user);
         formData.append('name', name);
         formData.append('gender', gender);
         formData.append('age', age);
