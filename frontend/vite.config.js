@@ -1,10 +1,9 @@
-import { defineConfig } from "vite"
-import react from "@vitejs/plugin-react"
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
- base: "/pikosen/",
-  build: {
-    outDir: "docs", 
-  },
-})
+  base: '/pikosen/',
+  build: { outDir: 'docs' },
+  server: { historyApiFallback: true, },
+});
