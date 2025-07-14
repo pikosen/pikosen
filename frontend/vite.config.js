@@ -3,7 +3,6 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
-  base: '/pikosen/',
   build: { outDir: 'dist' },
   server: { historyApiFallback: true, },
   base: process.env.VITE_BASE_PATH || '/pikosen/',
