@@ -20,7 +20,7 @@ import "./styles/AboutUs.css"
 
 function Logout() {
   localStorage.clear()
-  return <Navigate to="/login" />
+  return <Navigate to="/login/" />
 }
 
 function RegisterAndLogout() {
@@ -30,7 +30,7 @@ function RegisterAndLogout() {
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/pikosen/">
       <Routes>
         <Route
           path=""
@@ -40,22 +40,19 @@ function App() {
         />   
 
         <Route
-          path="/login"
+          path="/login/"
           element={<Login />}
         />
         <Route
-          path="/logout"
+          path="/logout/"
           element={<Logout />}
         />
         <Route
-          path="/register"
-          element={<RegisterAndLogout />}
-        />
-        <Route path="*"
-          element={<NotFound />} 
+          path="/register/"
+          element={<Register />}
         />
         <Route
-          path="/products"
+          path="/products/"
           element={
               <Products />}
           />
@@ -101,6 +98,9 @@ function App() {
           <Route
             path="/about-us"
             element={<AboutUs/>}
+          />
+          <Route path="*"
+            element={<NotFound />} 
           />
         </Routes>
      </BrowserRouter>
