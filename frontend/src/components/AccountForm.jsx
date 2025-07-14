@@ -36,12 +36,13 @@ function AccountForm({route}) {
         // Create FormData for file uploads
         const formData = new FormData();
 
-        formData.append('user', user);
+        formData.append('user', user.id);
         formData.append('name', name);
         formData.append('gender', gender);
         formData.append('age', age);
         formData.append('contact', contact);
         formData.append('isOwner', isOwner);
+        formData.append('user_mail', user.email);
 
         // Only append the photo if one was selected
         if (profilePhoto) {
