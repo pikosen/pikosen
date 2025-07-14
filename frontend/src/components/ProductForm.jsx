@@ -76,11 +76,7 @@ function ProductForm({route}) {
             console.error("Error details:", error.response?.data);
             alert(`Error: ${error.message}`);
         } finally {
-            {
-                businessId === null 
-                ? navigate("/createbusiness")
-                : setLoading(false)
-            }
+            setLoading(false)
         }
     }
 

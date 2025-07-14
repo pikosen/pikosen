@@ -77,7 +77,6 @@ function AccountForm({route}) {
             console.error("Error details:", error.response?.data);
             alert(`Error: ${error.message}`);
         } finally {
-            navigate('/dashboard')
             setLoading(false)
         }
     }
