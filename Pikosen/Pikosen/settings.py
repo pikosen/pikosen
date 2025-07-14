@@ -32,6 +32,7 @@ SECRET_KEY = 'django-insecure-dj%+gs1_$rhf0@wczp8b1$!75knv#5ux())su^f&y6sf8rkm0_
 DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
+CSRF_TRUSTED_ORIGINS=["https://pikosen-production.up.railway.app/", "127.0.0.1:8080"]
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES":(
