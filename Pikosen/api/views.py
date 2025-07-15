@@ -59,6 +59,7 @@ class UserAccountView(viewsets.ReadOnlyModelViewSet):
     serializer_class = UserSerializer
     permission_classes = [AllowAny]
 
+# tryiffix
     def get_queryset(self):
         user = self.request.user
         return user.get_queryset()
