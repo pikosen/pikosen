@@ -15,6 +15,7 @@
   border-bottom: #ff6200 solid 2px;
   padding: 0.5rem;
   text-align: center;
+  cursor: pointer; /* Make the header clickable */
 }
 
 .dashboard-header h2 {
@@ -302,6 +303,28 @@
   border-color: #ff6200;
 }
 
+/* New styles for dashboard action buttons, matching login page buttons */
+.dashboard-action-button {
+  background-color: #222222; /* Dark background */
+  color: #fff; /* White text */
+  font-size: 14px;
+  padding: 10px 16px;
+  border: 0;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: "Arimo", sans-serif;
+  text-decoration: none;
+  width: auto; /* Allow button to size based on content */
+  min-width: 120px; /* Ensure a minimum width */
+  text-align: center;
+  transition: background-color 0.3s ease;
+  display: inline-block; /* For proper padding and width */
+}
+
+.dashboard-action-button:hover {
+  background-color: #423e3e; /* Slightly lighter on hover */
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .dashboard-main {
@@ -348,5 +371,10 @@
     right: auto;
     flex-direction: row;
     justify-content: center;
+  }
+
+  .dashboard-action-button {
+    width: 100%; /* Full width on mobile */
+    max-width: 240px; /* Max width to prevent stretching too much */
   }
 }

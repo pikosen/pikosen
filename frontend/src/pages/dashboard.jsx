@@ -2,12 +2,13 @@
 
 import { useState, useEffect } from "react"
 import TopBar from "../components/TopBar"
-import { redirect, useNavigate, Link } from "react-router-dom"
+import { useNavigate, Link } from "react-router-dom"
 import api from "../api"
 import "../styles/Dashboard.css"
 
 function Dashboard() {
-  const [activeNav, setActiveNav] = useState("Add / Edit Products")
+  // Changed default activeNav to "Overview"
+  const [activeNav, setActiveNav] = useState("Overview")
   const [Account, setAccount] = useState([])
   const [Product, setProduct] = useState([])
   const [productName, setProductName] = useState("")
@@ -85,10 +86,7 @@ function Dashboard() {
       .catch((error) => {
         console.error("Error fetching account:", error)
       })
-      {Account === null
-      ? navigate("/updateinfo")
-      : setLoading(true);
-      }
+    Account === null ? navigate("/updateinfo") : setLoading(true)
   }
 
   const deleteProduct = (id) => {
@@ -116,68 +114,34 @@ function Dashboard() {
     getAccount()
   }, [])
 
+  // Added "Overview" to the top navigation items
   const navItemsTop = ["Edit Account Information", "Add / Edit Products", "Edit Business", "Cart"]
   const navItemsBottom = ["Settings", "Logout"]
 
-  return (
-    <div className="dashboard-container">
-      <TopBar />
-
-      <div className="dashboard-layout">
-        <div className="dashboard-main">
-          {/* Sidebar Navigation */}
-          <aside className="dashboard-sidebar">
-            <div className="dashboard-header">
-              <h2>Dashboard</h2>
-            </div>
-            <nav className="sidebar-nav">
-              <div className="nav-items">
-                {navItemsTop.map((label) => (
-                  <div
-                    key={label}
-                    className={`nav-item ${activeNav === label ? "active" : ""}`}
-                    onClick={() => setActiveNav(label)}
-                  >
-                    <span>{label}</span>
-                  </div>
-                ))}
-              </div>
-
-              <div className="nav-items">
-                {navItemsBottom.map((label) => (
-                  <div
-                    key={label}
-                    className={`nav-item ${activeNav === label ? "active" : ""}`}
-                    onClick={() => (label === "Logout" ? handleLogout() : setActiveNav(label))}
-                  >
-                    <span>{label}</span>
-                  </div>
-                ))}
-              </div>
-            </nav>
-          </aside>
-
-          {/* Main Content */}
-          <main className="dashboard-content-area">
+  const renderContent = () => {
+    switch (activeNav) {
+      case "Overview":
+        return (
+          <>
             {/* Profile Section */}
             <section className="profile-header">
               <div className="profile-info">
                 {Account.length === 0 ? (
                   <Link to="/updateinfo">
-                    <button className="add-button">Create account first</button>
+                    <button className="dashboard-action-button">Finalize Account Info</button>
                   </Link>
                 ) : (
                   <div>
                     {Account.map((account) => (
                       <div key={account.id} className="profile-display">
-                          <div
-                            className="profile-avatar"
-                            style={{
-                              backgroundImage: `url(${account.profilePhoto || "/placeholder.svg"})`, // Added placeholder for safety
-                              backgroundSize: "cover",
-                              backgroundPosition: "center",
-                            }}
-                          ></div>
+                        <div
+                          className="profile-avatar"
+                          style={{
+                            backgroundImage: `url(${account.profilePhoto || "/placeholder.svg"})`,
+                            backgroundSize: "cover",
+                            backgroundPosition: "center",
+                          }}
+                        ></div>
                         <div className="profile-details">
                           <h2 className="profile-name">{account.name}</h2>
                           <p className="profile-contact">
@@ -198,7 +162,7 @@ function Dashboard() {
             <div className="content-header">
               <h3 className="content-title">My Products</h3>
               <Link to="/addproduct">
-                <button className="add-button">Add Product</button>
+                <button className="dashboard-action-button">Add Product</button>
               </Link>
             </div>
 
@@ -304,7 +268,93 @@ function Dashboard() {
                 ))}
               </div>
             )}
-          </main>
+          </>
+        )
+      case "Edit Account Information":
+        return (
+          <div>
+            {/* Content for Edit Account Information */}
+            <h3>Edit Account Information</h3>
+            <p>This section is under construction.</p>
+          </div>
+        )
+      case "Add / Edit Products":
+        return (
+          <div>
+            {/* Content for Add / Edit Products */}
+            <h3>Add / Edit Products</h3>
+            <p>This section is under construction.</p>
+          </div>
+        )
+      case "Edit Business":
+        return (
+          <div>
+            {/* Content for Edit Business */}
+            <h3>Edit Business</h3>
+            <p>This section is under construction.</p>
+          </div>
+        )
+      case "Cart":
+        return (
+          <div>
+            {/* Content for Cart */}
+            <h3>Cart</h3>
+            <p>This section is under construction.</p>
+          </div>
+        )
+      case "Settings":
+        return (
+          <div>
+            {/* Content for Settings */}
+            <h3>Settings</h3>
+            <p>This section is under construction.</p>
+          </div>
+        )
+      default:
+        return <div>Select a navigation item.</div>
+    }
+  }
+
+  return (
+    <div className="dashboard-container">
+      <TopBar />
+
+      <div className="dashboard-layout">
+        <div className="dashboard-main">
+          {/* Sidebar Navigation */}
+          <aside className="dashboard-sidebar">
+            <div className="dashboard-header" onClick={() => setActiveNav("Overview")}>
+              <h2>Dashboard</h2>
+            </div>
+            <nav className="sidebar-nav">
+              <div className="nav-items">
+                {navItemsTop.map((label) => (
+                  <div
+                    key={label}
+                    className={`nav-item ${activeNav === label ? "active" : ""}`}
+                    onClick={() => setActiveNav(label)}
+                  >
+                    <span>{label}</span>
+                  </div>
+                ))}
+              </div>
+
+              <div className="nav-items">
+                {navItemsBottom.map((label) => (
+                  <div
+                    key={label}
+                    className={`nav-item ${activeNav === label ? "active" : ""}`}
+                    onClick={() => (label === "Logout" ? handleLogout() : setActiveNav(label))}
+                  >
+                    <span>{label}</span>
+                  </div>
+                ))}
+              </div>
+            </nav>
+          </aside>
+
+          {/* Main Content */}
+          <main className="dashboard-content-area">{renderContent()}</main>
         </div>
       </div>
     </div>
