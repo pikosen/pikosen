@@ -30,20 +30,10 @@ function RegisterAndLogout() {
 }
 
 function App() {
-  // Check if user is authenticated
-  const isAuthenticated = localStorage.getItem('access_token') !== null;
-
   return (
     <BrowserRouter>
       <Routes>
-        <Route 
-          path="" 
-          element={
-            isAuthenticated ? 
-              <Navigate to="/home/" replace /> : 
-              <Navigate to="/login/" replace />
-          } 
-        />
+        <Route path="" element={<Navigate to="/login/" replace />} />
 
         <Route path="/login/" element={<Login />} />
         <Route path="/logout/" element={<Logout />} />

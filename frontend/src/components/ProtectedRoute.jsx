@@ -41,7 +41,7 @@ function ProtectedRoute({children}) {
         const now = Date.now() / 1000
         
         if (tokenExpiration < now) {
-            await refreshToken
+            await refreshToken() // Fixed: Added parentheses
         }
         else {
             setIsAuthorized(true)
@@ -52,7 +52,7 @@ function ProtectedRoute({children}) {
         return <div>Loading...</div>
     }
 
-    return isAuthorized ? children : <Navigate to ="/login" />
+    return isAuthorized ? children : <Navigate to="/login/" />
 }
 
 export default ProtectedRoute
