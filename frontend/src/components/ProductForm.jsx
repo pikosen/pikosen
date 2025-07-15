@@ -32,18 +32,7 @@ function ProductForm({route}) {
         // Create FormData for file uploads
         const formData = new FormData();
 
-        let businessId;
-        if (Array.isArray(business)) {
-            // If account is an array, get the first item's id
-            businessId = business[0]?.id || business[0]?.pk || business[0];
-        } else {
-            // If account is an object, get its id
-            businessId = business.id || business.pk || business;
-        }
-
-         console.log('Business ID being sent:', businessId);
-
-        formData.append('business', businessId);
+        formData.append('business', business.pk);
         formData.append('productName', productName);
         formData.append('price', price);
         formData.append('stock', stock);

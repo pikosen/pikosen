@@ -42,18 +42,8 @@ function BusinessForm({route}) {
         const formData = new FormData();
 
         // Fix 4: Handle different possible account data structures
-        let ownerId;
-        if (Array.isArray(account)) {
-            // If account is an array, get the first item's id
-            ownerId = account[0]?.id || account[0]?.pk || account[0];
-        } else {
-            // If account is an object, get its id
-            ownerId = account.id || account.pk || account;
-        }
-
-        console.log('Owner ID being sent:', ownerId);
         
-        formData.append('owner', ownerId);
+        formData.append('owner', account.pk);
         formData.append('businessName', businessName);
         formData.append('businessDescription', businessDescription);
         formData.append('businessContact', businessContact);
