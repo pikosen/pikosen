@@ -62,7 +62,7 @@ class AccountUserView(viewsets.ViewSet):  # Changed from ReadOnlyModelViewSet to
 
     def list(self, request):
         user = self.request
-        queryset = self.queryset
+        queryset = self.queryset.filter(id = user.id)
         serializer = self.serializer_class(queryset, many=True)
         return Response(serializer.data)
     
