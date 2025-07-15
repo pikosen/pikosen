@@ -7,8 +7,5 @@ export default defineConfig(({ mode }) => ({
     outDir: "dist",
   },
   server: { historyApiFallback: true },
-  // Conditionally set base path:
-  // For development (npm run dev), use '/'
-  // For production builds, use process.env.VITE_BASE_PATH or '/pikosen/'
-  base: mode === "development" ? "/" : process.env.VITE_BASE_PATH || "/pikosen/",
+  base: process.env.VITE_BASE_PATH || "/pikosen/",
 }))
