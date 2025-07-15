@@ -5,7 +5,7 @@ import "../styles/AddProduct.css";
 
 function ProductForm({route}) {
     
-    const [business, setBusiness] = useState(null)
+    const [business, setBusiness] = useState([])
     const [productName, setProductName] = useState("")
     const [price, setPrice] = useState("")
     const [stock, setStock] = useState("")
@@ -23,11 +23,6 @@ function ProductForm({route}) {
             console.log(res.data)
             setBusiness(res.data)
         })
-        {
-            business === null
-            ? navigate("/createbusiness")
-            : setLoading(true);
-        }
     }, [])
 
     const handleSubmit = async (e) => {

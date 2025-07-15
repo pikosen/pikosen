@@ -3,6 +3,7 @@ import '../styles/Home.css';
 import api from "../api"
 import TopBar from '../components/TopBar';
 
+const baseURL = "https://pikosen-production.up.railway.app/"
 
 const Home = () => {
     const [Business, setBusiness] = useState([])
@@ -35,7 +36,7 @@ const Home = () => {
           {Business.map((buddy, index) => (
             <div key={index} className="buddy-card">
               <img
-                src={`${buddy.businessLogo}`}
+                src={`${baseURL}${buddy.businessLogo}`}
                 alt={`${buddy.businessName} logo`}
                 className="buddy-avatar"
                 style={{ width: '100px', height: '100px' }} // Add dimensions for testing
