@@ -21,7 +21,7 @@ const TopBar = () => {
   return (
     <nav className="topbar">
       <div className="topbar-left">
-        <Link to="/" className="logo-link">
+        <Link to="/home/" className="logo-link">
           <img src={LogoNav || "/placeholder.svg"} alt="PikoSen Logo" className="logo-image" />
         </Link>
       </div>
