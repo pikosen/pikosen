@@ -74,21 +74,17 @@ function Dashboard() {
       })
   }
 
-  const getAccount = async () => {
-    try {
-      const res = await api.get("api/dashboard/account/")
-      
-      if (!res.data || res.data.length === 0) {
-        // no account found — redirect
-        navigate("/login", { replace: true })
-      } else {
-        // valid account found
+  const getAccount = () => {
+    api
+      .get(`api/dashboard/account/`)
+      .then((res) => {
         setAccount(res.data)
-      }
-    } catch (error) {
-      console.error("Failed to fetch account:", error)
-      navigate("/login", { replace: true })
-    }
+        console.log(res.data)
+      })
+      .catch((error) => {
+        console.error("Error fetching account:", error)
+      })
+    Account === null ? navigate("/updateinfo") : setLoading(true)
   }
 
   const deleteProduct = (id) => {
