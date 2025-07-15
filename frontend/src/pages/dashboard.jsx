@@ -165,7 +165,9 @@ function Dashboard() {
             <section className="profile-header">
               <div className="profile-info">
                 {Account.length === 0 ? (
-                  "No account found"
+                  <Link to="/updateinfo">
+                    Create an account first
+                  </Link>
                 ) : (
                   <div>
                     {Account.map((account) => (
