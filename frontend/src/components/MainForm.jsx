@@ -13,24 +13,25 @@ function MainForm({route, method}) {
     const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
-    setLoading(true)
-    e.preventDefault()
-    setError("")
+    setLoading(true);
+    e.preventDefault();
+    setError("");
 
     try {
       const res = await api.post(route, { username, password })
-      if ( method == "login" )
+      if ( method === "login" )
         localStorage.setItem(ACCESS_TOKEN, res.data.access);
         localStorage.setItem(REFRESH_TOKEN, res.data.refresh);
-        navigate("/home/")
+        navigate("/home/");
     }
-    catch (error){
-      alert(error)
+    catch (error) {
+      alert(error);
     }
     finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
+  
     return (
         <form onSubmit={handleSubmit} className="login-form">
             <input
