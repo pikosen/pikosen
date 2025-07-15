@@ -16,9 +16,6 @@ function Dashboard() {
   const [origin, setOrigin] = useState("")
   const [type, setType] = useState("")
   const [grams, setGrams] = useState("")
-  const [cartItems, setCartItems] = useState([]);
-  const [selectedItems, setSelectedItems] = useState([]);
-  const [selectAll, setSelectAll] = useState(false);
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
 
@@ -90,21 +87,6 @@ function Dashboard() {
     Account === null ? navigate("/updateinfo") : setLoading(true)
   }
 
-  const getCart = async () => {
-    try {
-      const res = await api.get("api/bean-shops/products/cart/");
-      setCartItems(res.data);
-      setSelectedItems([]);
-      setSelectAll(false);
-    } catch (err) {
-      console.error("Error fetching cart:", err);
-    }
-  };
-
-  useEffect(() => {
-    if (activeNav === "Cart") getCart();
-  }, [activeNav]);
-
   const deleteProduct = (id) => {
     api
       .delete(`api/product/delete/${id}`)
@@ -119,47 +101,6 @@ function Dashboard() {
     setLoading(false)
     getProduct()
   }
-
-  // Toggle one checkbox
-  const handleSelectItem = (id) => {
-    setSelectedItems(prev =>
-      prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]
-    );
-  };
-
-  // Toggle “select all”
-  const handleSelectAll = () => {
-    if (selectAll) {
-      setSelectedItems([]);
-    } else {
-      setSelectedItems(cartItems.map(c => c.id));
-    }
-    setSelectAll(!selectAll);
-  };
-
-  // Inline quantity update
-  const handleQuantityChange = async (id, qty) => {
-    if (qty < 1) return;
-    try {
-      await api.put(`api/bean-shops/products/cart/${id}/`, { quantity: qty });
-      setCartItems(prev =>
-        prev.map(c => (c.id === id ? { ...c, quantity: qty } : c))
-      );
-    } catch (err) {
-      console.error("Error updating quantity:", err);
-    }
-  };
-
-  // Delete cart item
-  const handleDeleteCartItem = async (id) => {
-    try {
-      await api.delete(`api/bean-shops/products/cart/${id}/`);
-      setCartItems(prev => prev.filter(c => c.id !== id));
-      setSelectedItems(prev => prev.filter(x => x !== id));
-    } catch (err) {
-      console.error("Error deleting cart item:", err);
-    }
-  };
 
   const handleLogout = () => {
     localStorage.clear()
@@ -353,82 +294,12 @@ function Dashboard() {
         )
       case "Cart":
         return (
-          <section className="cart-container">
-            <h3>Your Cart</h3>
-            {cartItems.length === 0 ? (
-              <p>Your cart is empty.</p>
-            ) : (
-              <>
-                <table className="cart-table">
-                  <thead>
-                    <tr>
-                      <th><input type="checkbox" checked={selectAll} onChange={handleSelectAll} /></th>
-                      <th>Product</th>
-                      <th>Price</th>
-                      <th>Qty</th>
-                      <th>Subtotal</th>
-                      <th>Action</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {cartItems.map(c => {
-                      const p = c.item;
-                      return (
-                        <tr key={c.id}>
-                          <td>
-                            <input
-                              type="checkbox"
-                              checked={selectedItems.includes(c.id)}
-                              onChange={() => handleSelectItem(c.id)}
-                            />
-                          </td>
-                          <td className="cart-product-info">
-                            <img src={p.mainImg || "/placeholder.svg"} alt="" className="cart-product-img" />
-                            <span>{p.productName}</span>
-                          </td>
-                          <td>₱{p.price}</td>
-                          <td>
-                            <input
-                              type="number"
-                              min="1"
-                              value={c.quantity}
-                              onChange={e => handleQuantityChange(c.id, +e.target.value)}
-                              className="cart-qty-input"
-                            />
-                          </td>
-                          <td>₱{c.quantity * p.price}</td>
-                          <td>
-                            <button
-                              className="delete-button"
-                              onClick={() => handleDeleteCartItem(c.id)}
-                            >❌</button>
-                          </td>
-                        </tr>
-                      );
-                    })}
-                  </tbody>
-                </table>
-
-                <div className="cart-footer">
-                  <span className="cart-total">
-                    Total: ₱
-                    {cartItems
-                      .filter(c => selectedItems.includes(c.id))
-                      .reduce((sum, c) => sum + c.quantity * c.item.price, 0)
-                    }
-                  </span>
-                  <button
-                    className="checkout-button"
-                    disabled={selectedItems.length === 0}
-                    onClick={() =>
-                      alert(`Checking out ${selectedItems.length} item(s)`)
-                    }
-                  >Checkout</button>
-                </div>
-              </>
-            )}
-          </section>
-        );
+          <div>
+            {/* Content for Cart */}
+            <h3>Cart</h3>
+            <p>This section is under construction.</p>
+          </div>
+        )
       case "Settings":
         return (
           <div>

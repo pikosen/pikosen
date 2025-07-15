@@ -173,36 +173,35 @@ export default function Products() {
   }
 
   const handleSubmit = async (e) => {
-  e.preventDefault()
-  setLoading(true)
+    e.preventDefault()
+    setLoading(true)
 
-  // Debug what we have
-  console.log("Account:", Account)
-  console.log("Account.id:", Account[0].id)
-  console.log("selectedProduct:", selectedProduct?.id)
+    console.log("Account:", Account)
+    console.log("Account.id:", Account[0].id)
+    console.log("selectedProduct:", selectedProduct?.id)
 
+    const formData = new FormData()
+    formData.append('customer', Account[0].id);
+    formData.append('item', selectedProduct?.id);
+    formData.append('quantity', 1); // Add quantity field
+    formData.append('isOrdered', 1);
+    formData.append('isDelivered', 0);
 
-  const formData = new FormData()
-  formData.append('customer', Account[0].id);
-  formData.append('item', selectedProduct?.id);
-  formData.append('isOrdered', 1);
-  formData.append('isDelivered', 0);
-
-  try {
-    const res = await api.post(`api/bean-shops/products/cart/`, formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    })
-    console.log("Product added successfully:", res.data)
-    alert(`${selectedProduct.productName} added to cart!`)
-  } catch (error) {
-    console.error("Error adding product:", error)
-    alert(`Error: ${error.response?.data?.message || error.message}`)
-  } finally {
-    setLoading(false)
+    try {
+      const res = await api.post(`api/bean-shops/products/cart/`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      console.log("Product added successfully:", res.data)
+      alert(`${selectedProduct.productName} added to cart!`)
+    } catch (error) {
+      console.error("Error adding product:", error)
+      alert(`Error: ${error.response?.data?.message || error.message}`)
+    } finally {
+      setLoading(false)
+    }
   }
-}
 
   useEffect(() => {
     // When activeBuddy or currentProducts change, try to set a default selected product
