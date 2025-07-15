@@ -1,4 +1,3 @@
-import React from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
 import ProtectedRoute from "./components/ProtectedRoute"
 import Login from "./pages/login"
@@ -12,6 +11,8 @@ import AddingProduct from "./pages/AddProduct"
 import Dashboard from "./pages/dashboard"
 import AccountInfo from "./pages/AccountInfo"
 import AboutUs from "./pages/AboutUs"
+import CartPage from "./pages/CartPage" // Import CartPage
+import CheckoutPage from "./pages/CheckoutPage" // Import CheckoutPage
 import "./styles/register.css"
 import "./styles/Home.css"
 import "./styles/Createaccount.css"
@@ -32,79 +33,65 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route
-          path=""
-          element={
-              <Home />
-          }
-        />   
+        <Route path="" element={<Navigate to="/login/" replace />} />
 
-        <Route
-          path="/login/"
-          element={<Login />}
-        />
-        <Route
-          path="/logout/"
-          element={<Logout />}
-        />
-        <Route
-          path="/register/"
-          element={<Register />}
-        />
-        <Route
-          path="/products/"
-          element={
-              <Products />}
-          />
+        <Route path="/login/" element={<Login />} />
+        <Route path="/logout/" element={<Logout />} />
+        <Route path="/register/" element={<Register />} />
         <Route 
-            path="/address/" 
-            element={
+          path="/home/" 
+          element={
+            <ProtectedRoute>
+              <Home />
+            </ProtectedRoute>
+          } 
+        />
+        <Route path="/products/" element={<Products />} />
+        <Route
+          path="/address/"
+          element={
             <ProtectedRoute>
               <Address />
             </ProtectedRoute>
-              } 
-          />
+          }
+        />
         <Route
-            path="/addproduct/"
-            element={
+          path="/addproduct/"
+          element={
             <ProtectedRoute>
               <AddingProduct />
-            </ProtectedRoute>}
-          />
+            </ProtectedRoute>
+          }
+        />
         <Route
-            path="/createbusiness/"
-            element={
+          path="/createbusiness/"
+          element={
             <ProtectedRoute>
               <CreateBusiness />
             </ProtectedRoute>
           }
-          />
-          <Route
-            path="/dashboard/"
-            element={
+        />
+        <Route
+          path="/dashboard/"
+          element={
             <ProtectedRoute>
               <Dashboard />
             </ProtectedRoute>
-            }
-          />
-          <Route 
-            path="/updateinfo/"
-            element={
+          }
+        />
+        <Route
+          path="/updateinfo/"
+          element={
             <ProtectedRoute>
               <AccountInfo />
             </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/about-us"
-            element={<AboutUs/>}
-          />
-          <Route path="*"
-            element={<NotFound />} 
-          />
-        </Routes>
-     </BrowserRouter>
+          }
+        />
+        <Route path="/about-us" element={<AboutUs />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 
-export default App;
+export default App
