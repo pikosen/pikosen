@@ -38,14 +38,7 @@ function App() {
           }
         /> 
 
-        <Route
-          path=""
-          element={
-            localStorage.getItem("access_token")
-              ? <Navigate to="/home/" replace />
-              : <Navigate to="/login/" replace />
-          }
-        />
+        <Route path="/login/" element={<Login />} />
         <Route path="/logout/" element={<Logout />} />
         <Route path="/register/" element={<Register />} />
         <Route 
