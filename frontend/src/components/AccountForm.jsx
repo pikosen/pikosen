@@ -36,18 +36,7 @@ function AccountForm({route}) {
         // Create FormData for file uploads
         const formData = new FormData();
 
-        let userId;
-        if (Array.isArray(user)) {
-            // If account is an array, get the first item's id
-            userId = user[0]?.id || user[0]?.pk || user[0];
-        } else {
-            // If account is an object, get its id
-            userId = user.id || user.pk || user;
-        }
-
-        console.log('User ID being sent:', userId);
-
-        formData.append('user', userId);
+        formData.append('user', user.id);
         formData.append('name', name);
         formData.append('gender', gender);
         formData.append('age', age);
