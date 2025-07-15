@@ -6,8 +6,6 @@ import { redirect, useNavigate, Link } from "react-router-dom"
 import api from "../api"
 import "../styles/Dashboard.css"
 
-const baseURL = "https://pikosen-production.up.railway.app/"
-
 function Dashboard() {
   const [activeNav, setActiveNav] = useState("Add / Edit Products")
   const [Account, setAccount] = useState([])
@@ -175,7 +173,7 @@ function Dashboard() {
                           <div
                             className="profile-avatar"
                             style={{
-                              backgroundImage: `url(${baseURL}${account.profilePhoto || "/placeholder.svg"})`, // Added placeholder for safety
+                              backgroundImage: `url(${account.profilePhoto || "/placeholder.svg"})`, // Added placeholder for safety
                               backgroundSize: "cover",
                               backgroundPosition: "center",
                             }}
