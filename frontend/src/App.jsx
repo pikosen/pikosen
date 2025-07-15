@@ -49,7 +49,14 @@ function App() {
             </ProtectedRoute>
           } 
         />
-        <Route path="/products/" element={<Products />} />
+        <Route
+          path="/products/"
+          element={
+            <ProtectedRoute>
+              <Products />
+            </ProtectedRoute>
+          }
+        />
         <Route
           path="/address/"
           element={
@@ -87,14 +94,6 @@ function App() {
           element={
             <ProtectedRoute>
               <AccountInfo />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/login/"
-          element={
-            <ProtectedRoute>
-              <Login />
             </ProtectedRoute>
           }
         />
