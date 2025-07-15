@@ -56,9 +56,12 @@ class BeanShopView(viewsets.ReadOnlyModelViewSet):
     permission_classes = [AllowAny]
 
 class UserAccountView(viewsets.ReadOnlyModelViewSet):
-    queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = [AllowAny]
+
+    def get_queryset(self):
+        user = self.request.user
+        return user.get_queryset()
 
 class BeanShopProductsView(viewsets.ReadOnlyModelViewSet):
     queryset = Product.objects.all()
