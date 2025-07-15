@@ -57,7 +57,7 @@ class BeanShopView(viewsets.ReadOnlyModelViewSet):
 
 class UserAccountView(viewsets.ReadOnlyModelViewSet):
     serializer_class = UserSerializer
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
 
 # tryiffix
     def get_queryset(self):
