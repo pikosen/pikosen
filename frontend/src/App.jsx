@@ -90,6 +90,14 @@ function App() {
             </ProtectedRoute>
           }
         />
+        <Route
+          path="/login/"
+          element={
+            <ProtectedRoute>
+              <Login />
+            </ProtectedRoute>
+          }
+        />
         <Route path="/about-us" element={<AboutUs />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
