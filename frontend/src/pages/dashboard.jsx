@@ -7,6 +7,7 @@ import "../styles/Dashboard.css"
 function Dashboard() {
   // Changed default activeNav to "Overview"
   const [activeNav, setActiveNav] = useState("Overview")
+  const [activeSettingsTab, setActiveSettingsTab] = useState("General") // New state for settings tabs
   const [Account, setAccount] = useState([])
   const [Product, setProduct] = useState([])
   const [productName, setProductName] = useState("")
@@ -208,9 +209,43 @@ function Dashboard() {
     getCart()
   }, [])
 
-  // Added "Overview" to the top navigation items
-  const navItemsTop =["Edit Account Information", "Add / Edit Products", "Edit Business", "Cart"]
+  // Updated navigation items - removed "Edit Account Information" and "Edit Business"
+  const navItemsTop = ["Add / Edit Products", "Cart"]
   const navItemsBottom = ["Settings", "Logout"]
+
+  // Settings tabs
+  const settingsTabs = ["General", "Edit Account Information", "Edit Business"]
+
+  const renderSettingsContent = () => {
+    switch (activeSettingsTab) {
+      case "General":
+        return (
+          <div>
+            <h4>General Settings</h4>
+            <p>This section contains general application settings.</p>
+            <p>More settings options will be added here in the future.</p>
+          </div>
+        )
+      case "Edit Account Information":
+        return (
+          <div>
+            <h4>Edit Account Information</h4>
+            <p>This section is under construction.</p>
+            <p>Here you will be able to update your personal information, contact details, and profile settings.</p>
+          </div>
+        )
+      case "Edit Business":
+        return (
+          <div>
+            <h4>Edit Business Information</h4>
+            <p>This section is under construction.</p>
+            <p>Here you will be able to update your business details, branding, and business-related settings.</p>
+          </div>
+        )
+      default:
+        return <div>Select a settings tab.</div>
+    }
+  }
 
   const renderContent = () => {
     switch (activeNav) {
@@ -364,27 +399,11 @@ function Dashboard() {
             )}
           </>
         )
-      case "Edit Account Information":
-        return (
-          <div>
-            {/* Content for Edit Account Information */}
-            <h3>Edit Account Information</h3>
-            <p>This section is under construction.</p>
-          </div>
-        )
       case "Add / Edit Products":
         return (
           <div>
             {/* Content for Add / Edit Products */}
             <h3>Add / Edit Products</h3>
-            <p>This section is under construction.</p>
-          </div>
-        )
-      case "Edit Business":
-        return (
-          <div>
-            {/* Content for Edit Business */}
-            <h3>Edit Business</h3>
             <p>This section is under construction.</p>
           </div>
         )
@@ -466,9 +485,25 @@ function Dashboard() {
       case "Settings":
         return (
           <div>
-            {/* Content for Settings */}
             <h3>Settings</h3>
-            <p>This section is under construction.</p>
+            
+            {/* Settings Navigation Tabs */}
+            <div className="settings-tabs">
+              {settingsTabs.map((tab) => (
+                <button
+                  key={tab}
+                  className={`settings-tab ${activeSettingsTab === tab ? "active" : ""}`}
+                  onClick={() => setActiveSettingsTab(tab)}
+                >
+                  {tab}
+                </button>
+              ))}
+            </div>
+            
+            {/* Settings Content */}
+            <div className="settings-content">
+              {renderSettingsContent()}
+            </div>
           </div>
         )
       default:
