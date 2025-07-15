@@ -23,15 +23,14 @@ function ProductForm({route}) {
             console.log(res.data)
             setBusiness(res.data)
         })
+        if (business.length === 0){
+            navigate("/createbusiness")
+        }
     }, [])
 
     const handleSubmit = async (e) => {
         e.preventDefault()
         setLoading(true)
-
-        if (business.length === 0){
-            navigate("/createbusiness")
-        }
 
         // Create FormData for file uploads
         const formData = new FormData();
