@@ -62,7 +62,7 @@ class UserAccountView(viewsets.ReadOnlyModelViewSet):
 # tryiffix
     def get_queryset(self):
         user = self.request.user
-        return user.get_queryset()
+        return Response(user.get_queryset())
 
 class BeanShopProductsView(viewsets.ReadOnlyModelViewSet):
     queryset = Product.objects.all()
