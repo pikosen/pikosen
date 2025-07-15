@@ -67,6 +67,7 @@ function AccountForm({route}) {
             alert(`Error: ${error.message}`);
         } finally {
             setLoading(false)
+            navigate("/dashboard")
         }
     }
 
