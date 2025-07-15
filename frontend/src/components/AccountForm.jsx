@@ -36,7 +36,7 @@ function AccountForm({route}) {
         // Create FormData for file uploads
         const formData = new FormData();
 
-        formData.append('user', user.id);
+        formData.append('user', user[0].id);
         formData.append('name', name);
         formData.append('gender', gender);
         formData.append('age', age);
