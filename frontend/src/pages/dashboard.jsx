@@ -209,7 +209,7 @@ function Dashboard() {
   }, [])
 
   // Added "Overview" to the top navigation items
-  const navItemsTop =["Edit Account Information", "Add / Edit Products", "Edit Business", "Cart"]
+  const navItemsTop =["Cart", "Edit Account Information", "Add / Edit Products", "Edit Business"]
   const navItemsBottom = ["Settings", "Logout"]
 
   const renderContent = () => {
