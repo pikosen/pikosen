@@ -29,6 +29,10 @@ function ProductForm({route}) {
         e.preventDefault()
         setLoading(true)
 
+        if (business.length === 0){
+            navigate("/createbusiness")
+        }
+
         // Create FormData for file uploads
         const formData = new FormData();
 
