@@ -43,7 +43,7 @@ class AccountSerializer(serializers.ModelSerializer):
 class AccountUserSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = Account
+        model = User
         fields = '__all__'
 
 class BusinessViewSerializer(serializers.ModelSerializer):

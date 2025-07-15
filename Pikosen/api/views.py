@@ -56,8 +56,8 @@ class BeanShopView(viewsets.ReadOnlyModelViewSet):
     permission_classes = [AllowAny]
 
 class AccountUserView(viewsets.ViewSet):  # Changed from ReadOnlyModelViewSet to ModelViewSet
-    queryset = Account.objects.all()
-    serializer_class = AccountSerializer
+    queryset = User.objects.all()
+    serializer_class = AccountUserSerializer
     permission_classes = [AllowAny]  # Changed from AllowAny to IsAuthenticated
 
     def list(self, request):
