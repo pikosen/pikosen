@@ -84,7 +84,10 @@ function Dashboard() {
       .catch((error) => {
         console.error("Error fetching account:", error)
       })
-    Account === null ? navigate("/login/") : null
+      {Account === null
+      ? navigate("/updateinfo")
+      : setLoading(true);
+      }
   }
 
   const deleteProduct = (id) => {
