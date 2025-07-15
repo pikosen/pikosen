@@ -40,6 +40,11 @@ class AccountSerializer(serializers.ModelSerializer):
             'id', 'name', 'gender', 'age', 'contact', 'user_email', 'profilePhoto'
         ]
 
+class CreateAccountSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Account
+        fields = '__all__'
+
 class AccountUserSerializer(serializers.ModelSerializer):
 
     class Meta:
