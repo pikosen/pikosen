@@ -11,8 +11,6 @@ import AddingProduct from "./pages/AddProduct"
 import Dashboard from "./pages/dashboard"
 import AccountInfo from "./pages/AccountInfo"
 import AboutUs from "./pages/AboutUs"
-import CartPage from "./pages/CartPage" // Import CartPage
-import CheckoutPage from "./pages/CheckoutPage" // Import CheckoutPage
 import "./styles/register.css"
 import "./styles/Home.css"
 import "./styles/Createaccount.css"
@@ -33,7 +31,12 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Navigate to="/login/" replace />} />
+        <Route
+          path=""
+          element={
+              <Login />
+          }
+        /> 
 
         <Route path="/login/" element={<Login />} />
         <Route path="/logout/" element={<Logout />} />
