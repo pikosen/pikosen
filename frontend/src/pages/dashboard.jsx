@@ -16,6 +16,9 @@ function Dashboard() {
   const [origin, setOrigin] = useState("")
   const [type, setType] = useState("")
   const [grams, setGrams] = useState("")
+  const [Cart, setCart] = useState([])
+  const [selectedItems, setSelectedItems] = useState(new Set())
+  const [quantities, setQuantities] = useState({})
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
 
@@ -87,6 +90,98 @@ function Dashboard() {
     Account === null ? navigate("/updateinfo") : setLoading(true)
   }
 
+  const getCart = () => {
+    api
+      .get(`api/bean-shops/products/cart/`)
+      .then((res) => {
+        setCart(res.data)
+        // Initialize quantities for each cart item
+        const initialQuantities = {}
+        res.data.forEach(item => {
+          initialQuantities[item.id] = item.quantity || 1
+        })
+        setQuantities(initialQuantities)
+        console.log("Cart data:", res.data)
+      })
+      .catch((error) => {
+        console.error("Error fetching cart:", error)
+      })
+  }
+
+  const updateCartQuantity = (cartId, newQuantity) => {
+    if (newQuantity < 1) return
+    
+    const formData = new FormData()
+    formData.append('quantity', newQuantity)
+    
+    api
+      .put(`api/bean-shops/products/cart/${cartId}/`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then((res) => {
+        setQuantities(prev => ({
+          ...prev,
+          [cartId]: newQuantity
+        }))
+        console.log("Cart quantity updated:", res.data)
+      })
+      .catch((error) => {
+        console.error("Error updating cart quantity:", error)
+      })
+  }
+
+  const deleteCartItem = (cartId) => {
+    api
+      .delete(`api/bean-shops/products/cart/${cartId}/`)
+      .then((res) => {
+        if (res.status === 204) {
+          alert("Item removed from cart.")
+          getCart() // Refresh cart
+          // Remove from selected items if it was selected
+          setSelectedItems(prev => {
+            const newSelected = new Set(prev)
+            newSelected.delete(cartId)
+            return newSelected
+          })
+        } else {
+          alert("Failed to remove item from cart.")
+        }
+      })
+      .catch((error) => {
+        console.error("Error deleting cart item:", error)
+        alert("Error removing item from cart.")
+      })
+  }
+
+  const handleCheckboxChange = (cartId) => {
+    setSelectedItems(prev => {
+      const newSelected = new Set(prev)
+      if (newSelected.has(cartId)) {
+        newSelected.delete(cartId)
+      } else {
+        newSelected.add(cartId)
+      }
+      return newSelected
+    })
+  }
+
+  const handleCheckout = () => {
+    if (selectedItems.size === 0) {
+      alert("Please select items to checkout.")
+      return
+    }
+    
+    const selectedCartItems = Cart.filter(item => selectedItems.has(item.id))
+    const total = selectedCartItems.reduce((sum, item) => {
+      return sum + (item.item_price * quantities[item.id])
+    }, 0)
+    
+    alert(`Checkout ${selectedItems.size} items for ₱${total.toFixed(2)}`)
+    // Add your checkout logic here
+  }
+
   const deleteProduct = (id) => {
     api
       .delete(`api/product/delete/${id}`)
@@ -110,6 +205,7 @@ function Dashboard() {
   useEffect(() => {
     getProduct()
     getAccount()
+    getCart()
   }, [])
 
   // Added "Overview" to the top navigation items
@@ -295,9 +391,76 @@ function Dashboard() {
       case "Cart":
         return (
           <div>
-            {/* Content for Cart */}
-            <h3>Cart</h3>
-            <p>This section is under construction.</p>
+            <div className="content-header">
+              <h3 className="content-title">My Cart</h3>
+              {selectedItems.size > 0 && (
+                <button className="dashboard-action-button" onClick={handleCheckout}>
+                  Checkout ({selectedItems.size} items)
+                </button>
+              )}
+            </div>
+            
+            {Cart.length === 0 ? (
+              <p>Your cart is empty. Add some products to get started!</p>
+            ) : (
+              <div className="cart-list">
+                {Cart.map((item) => (
+                  <div key={item.id} className="cart-item">
+                    <div className="cart-item-checkbox">
+                      <input
+                        type="checkbox"
+                        checked={selectedItems.has(item.id)}
+                        onChange={() => handleCheckboxChange(item.id)}
+                      />
+                    </div>
+                    <div className="cart-item-info">
+                      <h4 className="cart-item-name">{item.item_name}</h4>
+                      <p className="cart-item-business">From: {item.business_name}</p>
+                      <p className="cart-item-type">Type: {item.item_type}</p>
+                      <p className="cart-item-price">Price: ₱{item.item_price}</p>
+                    </div>
+                    <div className="cart-item-quantity">
+                      <button 
+                        className="quantity-btn"
+                        onClick={() => updateCartQuantity(item.id, quantities[item.id] - 1)}
+                        disabled={quantities[item.id] <= 1}
+                      >
+                        -
+                      </button>
+                      <span className="quantity-display">{quantities[item.id] || 1}</span>
+                      <button 
+                        className="quantity-btn"
+                        onClick={() => updateCartQuantity(item.id, quantities[item.id] + 1)}
+                      >
+                        +
+                      </button>
+                    </div>
+                    <div className="cart-item-total">
+                      <p>Total: ₱{(item.item_price * quantities[item.id]).toFixed(2)}</p>
+                    </div>
+                    <div className="cart-item-actions">
+                      <button
+                        className="delete-button"
+                        onClick={() => deleteCartItem(item.id)}
+                        title="Remove from Cart"
+                      >
+                        ❌
+                      </button>
+                    </div>
+                  </div>
+                ))}
+                
+                <div className="cart-summary">
+                  <div className="cart-total">
+                    <h3>
+                      Total: ₱{Cart.filter(item => selectedItems.has(item.id))
+                        .reduce((sum, item) => sum + (item.item_price * quantities[item.id]), 0)
+                        .toFixed(2)}
+                    </h3>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         )
       case "Settings":
