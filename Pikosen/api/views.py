@@ -61,7 +61,7 @@ class AccountUserView(viewsets.ViewSet):  # Changed from ReadOnlyModelViewSet to
     permission_classes = [AllowAny]  # Changed from AllowAny to IsAuthenticated
 
     def list(self, request):
-        user = self.request.user
+        user = self.request
         queryset = self.queryset.filter(user = user.id)
         serializer = self.serializer_class(queryset, many=True)
         return Response(serializer.data)
