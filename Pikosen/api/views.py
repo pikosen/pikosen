@@ -55,14 +55,30 @@ class BeanShopView(viewsets.ReadOnlyModelViewSet):
     serializer_class = BusinessSerializer
     permission_classes = [AllowAny]
 
-class UserAccountView(viewsets.ReadOnlyModelViewSet):
-    serializer_class = UserSerializer
-    permission_classes = [IsAuthenticated]
+class AccountUserView(viewsets.ViewSet):  # Changed from ReadOnlyModelViewSet to ModelViewSet
+    queryset = Account.objects.all()
+    serializer_class = AccountSerializer
+    permission_classes = [AllowAny]  # Changed from AllowAny to IsAuthenticated
 
-# tryiffix
-    def get_queryset(self):
+    def list(self, request):
         user = self.request.user
-        return Response(user.get_queryset())
+        queryset = self.queryset.filter(user = user.id)
+        serializer = self.serializer_class(queryset, many=True)
+        return Response(serializer.data)
+    
+    def retrieve(self, request, pk=None):
+        product = self.queryset.get(pk=pk)
+        serializer = self.serializer_class(product)
+        return Response(serializer.data)
+    
+    def update(self, request, pk=None):
+        product = self.queryset.get(pk=pk)
+        serializer = self.serializer_class(product, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        else:
+            return Response(serializer.errors, status = 400)
 
 class BeanShopProductsView(viewsets.ReadOnlyModelViewSet):
     queryset = Product.objects.all()
