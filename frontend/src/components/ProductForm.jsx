@@ -23,15 +23,12 @@ function ProductForm({route}) {
             console.log(res.data)
             setBusiness(res.data)
         })
-        if (business.length === 0){
-            navigate("/createbusiness")
-        }
     }, [])
 
     const handleSubmit = async (e) => {
         e.preventDefault()
         setLoading(true)
-
+        
         // Create FormData for file uploads
         const formData = new FormData();
 
@@ -80,6 +77,9 @@ function ProductForm({route}) {
             alert(`Error: ${error.message}`);
         } finally {
             setLoading(false)
+            if (business.length === 0){
+                navigate("/createbusiness")
+            }
         }
     }
 
@@ -182,6 +182,7 @@ function ProductForm({route}) {
         </div>
         <button type="submit" disabled={loading}>
             {loading ? 'Submitting...' : 'Submit'}
+            
           </button>
     </form>
 }
