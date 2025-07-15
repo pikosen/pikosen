@@ -166,7 +166,7 @@ function Dashboard() {
               <div className="profile-info">
                 {Account.length === 0 ? (
                   <Link to="/updateinfo">
-                    Create an account first
+                    <button className="add-button">Create account first</button>
                   </Link>
                 ) : (
                   <div>
