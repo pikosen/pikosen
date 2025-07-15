@@ -1,5 +1,3 @@
-"use client"
-
 import { useState, useEffect } from "react"
 import TopBar from "../components/TopBar"
 import { useNavigate, Link } from "react-router-dom"
@@ -86,7 +84,7 @@ function Dashboard() {
       .catch((error) => {
         console.error("Error fetching account:", error)
       })
-    Account === null ? navigate("/updateinfo") : setLoading(true)
+    Account === null ? navigate("/updateinfo") : navigate("/login")
   }
 
   const deleteProduct = (id) => {
@@ -115,7 +113,7 @@ function Dashboard() {
   }, [])
 
   // Added "Overview" to the top navigation items
-  const navItemsTop = ["Edit Account Information", "Add / Edit Products", "Edit Business", "Cart"]
+  const navItemsTop =["Edit Account Information", "Add / Edit Products", "Edit Business", "Cart"]
   const navItemsBottom = ["Settings", "Logout"]
 
   const renderContent = () => {
